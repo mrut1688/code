@@ -5,7 +5,7 @@ import datetime
 
     
 try:
-    ser = serial.Serial('COM7', 115200)
+    ser = serial.Serial('COM7', 74880)
 except :
     print("connect to comport7")
 
