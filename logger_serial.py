@@ -5,11 +5,11 @@ import datetime
 
     
 try:
-    ser = serial.Serial('COM7', 74880)
+    ser = serial.Serial('COM7', 115200)
 except :
     print("connect to comport7")
 
-
+print(str(ser.readline().decode('utf-8').strip().split(',')).replace("[","").replace("]","").replace("'","").replace(" ","") + '\n')
 
 closefile_flag=0
 def timer_callback():
@@ -22,28 +22,37 @@ def logger_data():
     global thread
     global ser
     
-    timestamp = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+    timestamp = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
     file_name = f"data_{timestamp}.txt"
-    file= open(r"D:/matlab/ymaps_code/data"+file_name, "w") 
+    file= open("D:/matlab/ymaps_code/data"+file_name, "w") 
     print("File created:", file_name)
     
     closefile_flag=0
+    
     thread=threading.Timer(120,timer_callback)
     thread.start()
     
+    o=1
     
-    while True:
+    while o==1:
+#         print(".")
+#         print(str(ser.readline().decode('utf-8').strip().split(',')) + '\n')
+#         file.write(str(ser.readline().decode('utf-8').strip().split(',')) + '\n')
+#         print(".")
         try:
-            file.write(str(ser.readline().decode('utf-8').strip().split(',')).replace("'","").replace("[","").replace("]","").replace(" ","") + '\n')
+             
+             file.write(str(ser.readline().decode('utf-8').strip().split(',')).replace("[","").replace("]","").replace("'","").replace(" ","") + '\n')
+             print(".")
         except KeyboardInterrupt:
-            file.close()
-            print(f"file{file_name} cloced \n")
+             file.close()
+             print(f"file{file_name} cloced \n")
         
-            break
+            
         if(closefile_flag==1):
             file.close()
             print(f"file{file_name} cloced after 120s \n")
-            break
+            
+        print(".")
 
 def main(i):
     while True:
