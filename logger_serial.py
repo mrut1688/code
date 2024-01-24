@@ -3,11 +3,13 @@ import time
 import threading
 import datetime
 
+while  True:
+    try:
+        ser = serial.Serial('COM7', 115200)
+        break
+    except  serial.serialutil.SerialException:
     
-try:
-    ser = serial.Serial('COM7', 115200)
-except :
-    print("connect to comport7")
+        print("connect to comport7")
 
 print(str(ser.readline().decode('utf-8').strip().split(',')).replace("[","").replace("]","").replace("'","").replace(" ","") + '\n')
 
