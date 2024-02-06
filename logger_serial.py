@@ -67,7 +67,7 @@ def main(i):
         s=str(input("press s to start"))
         if(s=='s'):
             logger_data()
-            s=' '
+            s=''
         
         
 if __name__=="__main__":
