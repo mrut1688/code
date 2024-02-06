@@ -2,7 +2,7 @@ import serial
 import time
 import threading
 import datetime
-
+import os
 while  True:
     try:
         ser = serial.Serial('COM7', 115200)
@@ -18,15 +18,21 @@ def timer_callback():
     global closefile_flag
     closefile_flag=1
  
-    
 def logger_data():
     global closefile_flag
     global thread
     global ser
     
+    datestamp = datetime.datetime.now().strftime("%Y%m%d")
     timestamp = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
-    file_name = f"data_{timestamp}.txt"
-    file= open("D:/matlab/ymaps_code/data"+file_name, "w") 
+    file_name = f"data_{timestamp}.csv"
+    par_dir="D:/matlab/ymaps_code/data/"
+    path= os.path.join(par_dir+datestamp)
+    
+    if not os.path.exists(path): 
+        os.mkdir(path)
+        
+    file= open(path+"/"+file_name, "w") 
     print("File created:", file_name)
     
     closefile_flag=0
