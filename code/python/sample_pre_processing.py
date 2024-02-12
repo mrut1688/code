@@ -112,6 +112,15 @@ plt.xlabel('Freq (Hz)')
 plt.ylabel('FFT Amplitude |T7(freq)|')
 plt.xlim(0, 20)
 plt.grid(linestyle = ':', linewidth = 0.5)
+
+
+plt.subplot(313)
+
+plt.plot(freq,20*np.log10(np.abs(E1)), 'b',linewidth=0.5)
+plt.xlabel('Freq (Hz)')
+plt.ylabel('FFT '+r'$20log_{10}$'+'|T7(freq)| '+r'$db$')
+plt.xlim(0, 20)
+plt.grid(linestyle = ':', linewidth = 0.5)
 plt.tight_layout()
 plt.show()
 
@@ -134,6 +143,17 @@ plt.plot(freq, np.abs(E2), '',linewidth=0.5)
 plt.xlabel('Freq (Hz)')
 plt.ylabel('FFT Amplitude |C3(freq)|')
 plt.xlim(0, 20)
+#plt.tight_layout()
+plt.grid(linestyle = ':', linewidth = 0.5)
+#plt.show()
+
+
+plt.subplot(313)
+
+plt.plot(freq, 20*np.log10(np.abs(E2)), 'b',linewidth=0.5)
+plt.xlabel('Freq (Hz)')
+plt.ylabel('FFT '+r'$20log_{10}$'+'|C3(freq)| '+r'$db$')
+plt.xlim(0, 20)
 plt.tight_layout()
 plt.grid(linestyle = ':', linewidth = 0.5)
 plt.show()
@@ -155,6 +175,17 @@ plt.plot(freq, np.abs(E3), '',linewidth=0.5)
 plt.xlabel('Freq (Hz)')
 plt.ylabel('FFT Amplitude |C4(freq)|')
 plt.xlim(0, 20)
+#plt.tight_layout()
+plt.grid(linestyle = ':', linewidth = 0.5)
+#plt.show()
+
+
+plt.subplot(313)
+
+plt.plot(freq,20*np.log10(np.abs(E3)), 'b',linewidth=0.5)
+plt.xlabel('Freq (Hz)')
+plt.ylabel('FFT '+r'$20log_{10}$'+'|C4(freq)| '+r'$db$')
+plt.xlim(0, 20)
 plt.tight_layout()
 plt.grid(linestyle = ':', linewidth = 0.5)
 plt.show()
@@ -175,6 +206,15 @@ plt.subplot(212)
 plt.plot(freq, np.abs(E3), 'y',linewidth=0.5)
 plt.xlabel('Freq (Hz)')
 plt.ylabel('FFT Amplitude |T8(freq)|')
+plt.xlim(0, 20)
+plt.grid(linestyle = ':', linewidth = 0.5)
+
+
+plt.subplot(313)
+
+plt.plot(freq,20*np.log10(np.abs(E4)), 'b',linewidth=0.5)
+plt.xlabel('Freq (Hz)')
+plt.ylabel('FFT '+r'$20log_{10}$'+'|T8(freq)| '+r'$db$')
 plt.xlim(0, 20)
 plt.grid(linestyle = ':', linewidth = 0.5)
 plt.tight_layout()
