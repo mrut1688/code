@@ -5,19 +5,13 @@ void setup() {
 }
 
 void loop() {
-Serial.print(EEGFilter(analogRead(eeg[0])*3.3000/4096),6);
+Serial.print(EEGFilter(analogRead(eeg[3])*3.3000/4096),6);  //C3
 Serial.print(",");
-Serial.print(EEGFilter(analogRead(eeg[1])*3.3000/4096),6);
+Serial.print(EEGFilter(analogRead(eeg[4])*3.3000/4096),6);  //T8
 Serial.print(",");
-Serial.print(EEGFilter(analogRead(eeg[2])*3.3000/4096),6);
+Serial.print(EEGFilter(analogRead(eeg[5])*3.3000/4096),6);  //C4
 Serial.print(",");
-Serial.print(EEGFilter(analogRead(eeg[3])*3.3000/4096),6);
-Serial.print(",");
-Serial.print(EEGFilter(analogRead(eeg[4])*3.3000/4096),6);
-Serial.print(",");
-Serial.print(EEGFilter(analogRead(eeg[5])*3.3000/4096),6);
-Serial.print(",");
-Serial.print(EEGFilter(analogRead(eeg[6])*3.3000/4096),6);
+Serial.print(EEGFilter(analogRead(eeg[6])*3.3000/4096),6);  //R7
 Serial.println("");
 delay(1);
 
