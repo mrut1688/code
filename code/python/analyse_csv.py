@@ -231,6 +231,116 @@ def plotter_fft(E1,E2,E3,E4,N,T_f,freq):
 
 
 
+def plotter_psd(eeg1,eeg2,eeg3,eeg4,s_f):
+    eeg1_=eeg1.to_numpy()
+    eeg1_=eeg1_.reshape(21345,)
+    eeg2_=eeg2.to_numpy().reshape(21345,)
+    eeg3_=eeg3.to_numpy().reshape(21345,)
+    eeg4_=eeg4.to_numpy().reshape(21345,)
+
+
+
+    plt.style.use('dark_background')
+    fig,(ax1,ax2) =plt.subplots(nrows=2,layout='constrained')
+
+
+    ax1.plot(T,eeg1,'red','--',linewidth=0.2)
+
+    ax1.set_ylabel('signal in V')
+    ax1.set_xlabel('Time in s')
+    ax1.set_xlim(-0.1,120)
+    #plt.xlabel('Time-s')
+
+    ax1.set_title('EEG T7')
+    ax1.grid(linewidth=0.5,linestyle=':',color='green')
+    Pxx,fxx,t,im=ax2.specgram(eeg1_,NFFT=170,Fs=s_f,mode='psd',scale='dB',
+                            noverlap=158,cmap='jet'
+                            ,vmin=-50)
+    ax2.set_ylim(4,20)
+    ax2.set_xlim(-0.10,120)
+    fig.colorbar(im,shrink=0.6).set_label('power in '+r'$dB$')
+    ax2.set_ylabel('Frequency')
+    ax2.set_xlabel('Time in s')
+    ax2.set_title('PSD of T7')
+    ax2.grid(linewidth=0.5,linestyle=':',color='green')
+    plt.show()
+
+
+    plt.style.use('dark_background')
+    fig,(ax1,ax2) =plt.subplots(nrows=2,layout='constrained')
+
+
+    ax1.plot(T,eeg2_,'red','--',linewidth=0.2)
+
+    ax1.set_ylabel('signal in V')
+    ax1.set_xlabel('Time in s')
+    ax1.set_xlim(-0.1,120)
+    #plt.xlabel('Time-s')
+
+    ax1.set_title('EEG C3')
+    ax1.grid(linewidth=0.5,linestyle=':',color='green')
+    Pxx,fxx,t,im=ax2.specgram(eeg2_,NFFT=170,Fs=s_f,mode='psd',scale='dB',
+                            noverlap=158,cmap='jet'
+                            ,vmin=-50)
+    ax2.set_ylim(4,20)
+    ax2.set_xlim(-0.10,120)
+    fig.colorbar(im,shrink=0.6).set_label('power in '+r'$dB$')
+    ax2.set_ylabel('Frequency')
+    ax2.set_xlabel('Time in s')
+    ax2.set_title('PSD of C3')
+    ax2.grid(linewidth=0.5,linestyle=':',color='green')
+    plt.show()
+
+    plt.style.use('dark_background')
+    fig,(ax1,ax2) =plt.subplots(nrows=2,layout='constrained')
+
+
+    ax1.plot(T,eeg3_,'red','--',linewidth=0.2)
+
+    ax1.set_ylabel('signal in V')
+    ax1.set_xlabel('Time in s')
+    ax1.set_xlim(-0.1,120)
+    #plt.xlabel('Time-s')
+
+    ax1.set_title('EEG C4')
+    ax1.grid(linewidth=0.5,linestyle=':',color='green')
+    Pxx,fxx,t,im=ax2.specgram(eeg3_,NFFT=170,Fs=s_f,mode='psd',scale='dB',
+                            noverlap=158,cmap='jet'
+                            ,vmin=-50)
+    ax2.set_ylim(4,20)
+    ax2.set_xlim(-0.10,120)
+    fig.colorbar(im,shrink=0.6).set_label('power in '+r'$dB$')
+    ax2.set_ylabel('Frequency')
+    ax2.set_xlabel('Time in s')
+    ax2.set_title('PSD of C4')
+    ax2.grid(linewidth=0.5,linestyle=':',color='green')
+    plt.show()
+
+    plt.style.use('dark_background')
+    fig,(ax1,ax2) =plt.subplots(nrows=2,layout='constrained')
+
+
+    ax1.plot(T,eeg4_,'red','--',linewidth=0.2)
+
+    ax1.set_ylabel('signal in V')
+    ax1.set_xlabel('Time in s')
+    ax1.set_xlim(-0.1,120)
+    #plt.xlabel('Time-s')
+
+    ax1.set_title('EEG T8')
+    ax1.grid(linewidth=0.5,linestyle=':',color='green')
+    Pxx,fxx,t,im=ax2.specgram(eeg4_,NFFT=170,Fs=s_f,mode='psd',scale='dB',
+                            noverlap=158,cmap='jet'
+                            ,vmin=-50)
+    ax2.set_ylim(4,20)
+    ax2.set_xlim(-0.10,120)
+    fig.colorbar(im,shrink=0.6).set_label('power in '+r'$dB$')
+    ax2.set_ylabel('Frequency')
+    ax2.set_xlabel('Time in s')
+    ax2.set_title('PSD of T8')
+    ax2.grid(linewidth=0.5,linestyle=':',color='green')
+    plt.show()
+
 
 
 
