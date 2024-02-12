@@ -4,6 +4,8 @@ import threading
 import datetime
 import os
 import analyse_csv
+
+
 while  True:
     try:
         ser = serial.Serial('COM7', 115200)
@@ -180,6 +182,7 @@ def logger_data():
     sampling_freq=analyse_csv.get_sampling_freq(file_name,path)    
     print(sampling_freq)
     analyse_csv.muscle_state(file_name,path)
+    analyse_csv.get_fft(file_name,path) 
     
 def main(i):
     while True:

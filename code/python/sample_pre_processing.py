@@ -45,40 +45,43 @@ len(T)
 plt.style.use('dark_background')
 
 # %%
-fig1=plt.Figure(figsize= (10,8))
+plt.Figure(figsize= (10,8))
+plt.subplot(2,2,1)
+
 plt.plot(T,eeg1,'r',linewidth=0.5)
 plt.ylabel('V')
 plt.xlabel('Time-s')
 plt.title('EEG T7')
 plt.grid(linestyle = ':', linewidth = 0.5)
-plt.show()
 
+plt.subplot(2,2,2)
 # %%
-fig2=plt.Figure(figsize= (10,8))
+
 plt.plot(T,eeg2,'b',linewidth=0.5)
 plt.ylabel('V')
 plt.xlabel('Time-s')
 plt.title('EEG C3')
 plt.grid(linestyle = ':', linewidth = 0.5)
-plt.show()
+
 
 # %%
+plt.subplot(2,2,3)
 
-fig3=plt.Figure(figsize= (10,8))
 plt.plot(T,eeg3,'g',linewidth=0.5)
 plt.ylabel('V')
 plt.xlabel('Time-s')
 plt.title('EEG C4')
 plt.grid(linestyle = ':', linewidth = 0.5)
-plt.show()
+
 
 # %%
-fig4=plt.Figure(figsize= (10,8))
+plt.subplot(2,2,4)
 plt.plot(T,eeg4,'m',linewidth=0.5)
 plt.ylabel('V')
 plt.xlabel('Time-s')
 plt.title('EEG T8')
 plt.grid(linestyle = ':', linewidth = 0.5)
+plt.tight_layout()
 plt.show()
 
 # %%
@@ -96,8 +99,8 @@ freq=N/T_f
 
 # %%
 
-fig5=plt.Figure(facecolor='#94F008')
-plt.subplot(211)
+
+plt.subplot(311)
 
 plt.plot(T,eeg1,'r',linewidth=0.5)
 plt.ylabel('V')
@@ -105,9 +108,9 @@ plt.xlabel('Time-s')
 plt.title('EEG T7')
 plt.grid(linestyle = ':', linewidth = 0.5)
 
-plt.subplot(212)
+plt.subplot(312)
 
-plt.plot(freq, np.abs(E1), '',linewidth=0.5)
+plt.plot(freq, np.abs(E1), 'g',linewidth=0.5)
 plt.xlabel('Freq (Hz)')
 plt.ylabel('FFT Amplitude |T7(freq)|')
 plt.xlim(0, 20)
@@ -124,22 +127,20 @@ plt.grid(linestyle = ':', linewidth = 0.5)
 plt.tight_layout()
 plt.show()
 
-
-
 # %%
-plt.Figure(facecolor='#94F008')
-plt.subplot(211)
 
-plt.plot(T,eeg2,'g',linewidth=0.5)
+plt.subplot(311)
+
+plt.plot(T,eeg2,'r',linewidth=0.5)
 plt.ylabel('V')
 
 plt.xlabel('Time-s')
 plt.title('EEG C3')
 plt.grid(linestyle = ':', linewidth = 0.5)
 
-plt.subplot(212)
+plt.subplot(312)
 
-plt.plot(freq, np.abs(E2), '',linewidth=0.5)
+plt.plot(freq, np.abs(E2), 'g',linewidth=0.5)
 plt.xlabel('Freq (Hz)')
 plt.ylabel('FFT Amplitude |C3(freq)|')
 plt.xlim(0, 20)
@@ -160,8 +161,8 @@ plt.show()
 
 
 # %%
-plt.Figure(facecolor='#94F008')
-plt.subplot(211)
+
+plt.subplot(311)
 
 plt.plot(T,eeg3,'r',linewidth=0.5)
 plt.ylabel('V')
@@ -169,9 +170,9 @@ plt.xlabel('Time-s')
 plt.title('EEG C4')
 plt.grid(linestyle = ':', linewidth = 0.5)
 
-plt.subplot(212)
+plt.subplot(312)
 
-plt.plot(freq, np.abs(E3), '',linewidth=0.5)
+plt.plot(freq, np.abs(E3), 'g',linewidth=0.5)
 plt.xlabel('Freq (Hz)')
 plt.ylabel('FFT Amplitude |C4(freq)|')
 plt.xlim(0, 20)
@@ -190,20 +191,19 @@ plt.tight_layout()
 plt.grid(linestyle = ':', linewidth = 0.5)
 plt.show()
 
-
 # %%
-plt.Figure(facecolor='#94F008')
-plt.subplot(211)
 
-plt.plot(T,eeg4,'m',linewidth=0.5)
+plt.subplot(311)
+
+plt.plot(T,eeg4,'r',linewidth=0.5)
 plt.ylabel('V')
 plt.xlabel('Time-s')
 plt.title('EEG T8')
 plt.grid(linestyle = ':', linewidth = 0.5)
 
-plt.subplot(212)
+plt.subplot(312)
 
-plt.plot(freq, np.abs(E3), 'y',linewidth=0.5)
+plt.plot(freq, np.abs(E4), 'g',linewidth=0.5)
 plt.xlabel('Freq (Hz)')
 plt.ylabel('FFT Amplitude |T8(freq)|')
 plt.xlim(0, 20)
@@ -219,7 +219,6 @@ plt.xlim(0, 20)
 plt.grid(linestyle = ':', linewidth = 0.5)
 plt.tight_layout()
 plt.show()
-
 
 
 
