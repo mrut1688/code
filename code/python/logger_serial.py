@@ -14,7 +14,9 @@ while  True:
         print("connect to comport7")
         
 
-print(str(ser.readline().decode('utf-8').strip().split(',')).replace("[","").replace("]","").replace("'","").replace(" ","") + '\n')
+print(str(ser.readline().decode('utf-8').strip().split(','))
+      .replace("[","").replace("]","").replace("'","")
+      .replace(" ","") + '\n')
 
 def timer_callback():
     global closefile_flag
@@ -74,8 +76,11 @@ timmer[4]=threading.Timer(20,timer2_callback)
 timmer[5]=threading.Timer(10,timer3_callback)
 
 timer_count=0
-movements=["rest for 10 s","right hand slow mostion for next 20 s","right hand fast motion for next 20 s","rest for next 20 s ",
-           "left hand slow mostion for next 20 s","left hand fast motion for next 20 s","random motion for 10 s"]
+movements=["rest for 10 s","right hand slow mostion for next 20 s",
+           "right hand fast motion for next 20 s","rest for next 20 s ",
+           "left hand slow mostion for next 20 s",
+           "left hand fast motion for next 20 s",
+           "random motion for 10 s"]
 
 
 def logger_data_img():
@@ -117,7 +122,9 @@ def logger_data_img():
         
         try:
              
-             file.write(str(ser.readline().decode('utf-8').strip().split(',')).replace("[","").replace("]","").replace("'","").replace(" ","") + '\n')
+             file.write(str(ser.readline().decode('utf-8').strip().
+                            split(',')).replace("[","").replace("]","").
+                        replace("'","").replace(" ","") + '\n')
              
         except KeyboardInterrupt:
              file.close()
@@ -135,7 +142,7 @@ def logger_data_img():
     nexts=input('do you want to analyse the data?[Y/N]')
     if next==Y :
         analyse_csv.get_fft(file_name,path) 
-
+    return file_name,path
  
 def logger_data():
     global closefile_flag
@@ -172,7 +179,9 @@ def logger_data():
     while o==1:
         try:
             
-             file.write(str(ser.readline().decode('utf-8').strip().split(',')).replace("[","").replace("]","").replace("'","").replace(" ","") + '\n')
+             file.write(str(ser.readline().decode('utf-8').strip().
+                            split(',')).replace("[","").replace("]","")
+                        .replace("'","").replace(" ","") + '\n')
              
         except KeyboardInterrupt:
              file.close()
@@ -190,17 +199,17 @@ def logger_data():
     nexts=input('do you want to analyse the data?[Y/N]')
     if next==Y :
         analyse_csv.get_fft(file_name,path) 
-        
+    return file_name,path
 def main(i):
     while True:
         s=str(input("press s for actual data or press i  for imaginaty data "))
         if(s=='s'):
-            logger_data()
+            file_name,path=logger_data()
             s=''
         if(s=='i'):
-            logger_data_img()
+            file_name,path=logger_data_img()
             s=''
-        
+    return file_name,path
         
 if __name__=="__main__":
     main(0)
