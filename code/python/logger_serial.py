@@ -129,8 +129,12 @@ def logger_data_img():
             print(f"file{file_name} cloced after 120s \n")
             break 
     sampling_freq=analyse_csv.get_sampling_freq(file_name,path)    
-    print(sampling_freq)
+    print('data was sampled at rate of'+sampling_freq+r'$Hz$')
     analyse_csv.muscle_state(file_name,path)
+    
+    nexts=input('do you want to analyse the data?[Y/N]')
+    if next==Y :
+        analyse_csv.get_fft(file_name,path) 
 
  
 def logger_data():
@@ -180,10 +184,13 @@ def logger_data():
             print(f"file{file_name} cloced after 120s \n")
             break 
     sampling_freq=analyse_csv.get_sampling_freq(file_name,path)    
-    print(sampling_freq)
+    print('data was sampled at rate of'+sampling_freq+r'$Hz$')
     analyse_csv.muscle_state(file_name,path)
-    analyse_csv.get_fft(file_name,path) 
     
+    nexts=input('do you want to analyse the data?[Y/N]')
+    if next==Y :
+        analyse_csv.get_fft(file_name,path) 
+        
 def main(i):
     while True:
         s=str(input("press s for actual data or press i  for imaginaty data "))

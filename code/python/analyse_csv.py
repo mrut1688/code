@@ -49,12 +49,15 @@ def muscle_state(filename,path):
 def get_fft(filename,path):
     
     eeg_df=pd.read_csv(path+"/"+filename)
+    try:
+        eeg_df.columns=['e1','e2','e3','T7','C3','C4','T8']
+    except ValueError:
+        eeg_df.columns=['T7','C3','C4','T8']
     
-    eeg_df.columns=['e1','e2','e3','t7','c3','c4','t8']
-    eeg1=eeg_df.loc[:,["t7"]]
-    eeg2=eeg_df.loc[:,["c3"]]
-    eeg3=eeg_df.loc[:,["c4"]]
-    eeg4=eeg_df.loc[:,["t8"]]
+    eeg1=eeg_df.loc[:,["T7"]]
+    eeg2=eeg_df.loc[:,["C3"]]
+    eeg3=eeg_df.loc[:,["C4"]]
+    eeg4=eeg_df.loc[:,["C8"]]
     
     s_f=len(eeg1)/120
     t_f=1/s_f
@@ -70,7 +73,7 @@ def get_fft(filename,path):
     T_f=len(E1)/s_f
     freq=N/T_f
     plotter_fft(E1,E2,E3,E4,T_f,freq)
-    
+    plotter_psd(eeg1,eeg2,eeg3,eeg4,s_f)
 
 def plotter_eeg(eeg1,eeg2,eeg3,eeg4,T):
     

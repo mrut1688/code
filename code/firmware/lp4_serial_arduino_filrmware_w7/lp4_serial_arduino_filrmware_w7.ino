@@ -1,11 +1,17 @@
 const int eeg[]={34,35,32,33,25,26,27};
 
 void setup() {
-  Serial.begin(115200);
+  Serial.begin(460800);
 }
 
 void loop() {
-Serial.print(EEGFilter(analogRead(eeg[4])*3.3000/4096),6);  //T7
+Serial.print(EEGFilter(analogRead(eeg[1])*3.3000/4096),6); 
+Serial.print(",");
+Serial.print(EEGFilter(analogRead(eeg[2])*3.3000/4096),6);  
+Serial.print(",");
+Serial.print(EEGFilter(analogRead(eeg[3])*3.3000/4096),6);  
+Serial.print(",");
+Serial.print(EEGFilter(analogRead(eeg[4])*3.3000/4096),6);  //R7
 Serial.print(",");
 Serial.print(EEGFilter(analogRead(eeg[5])*3.3000/4096),6);  //C3
 Serial.print(",");
