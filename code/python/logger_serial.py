@@ -4,7 +4,8 @@ import threading
 import datetime
 import os
 import analyse_csv
-
+from tkinter import *
+from tkinter.filedialog import askdirectory
 
 while  True:
     try:
@@ -94,10 +95,14 @@ def logger_data_img():
     global timer_count
     global movements
       
+    root = Tk()
+    root.withdraw()
+    root.attributes('-topmost', True)
     datestamp = datetime.datetime.now().strftime("%Y%m%d")
     timestamp = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
     file_name = f"data_{timestamp}.csv"
-    par_dir="D:/matlab/ymaps_code/data/"
+    par_dir=askdirectory()
+    
     path= os.path.join(par_dir+datestamp)
     
     if not os.path.exists(path): 
@@ -155,10 +160,12 @@ def logger_data():
     global timer_count
     global movements
     
+   
     datestamp = datetime.datetime.now().strftime("%Y%m%d")
     timestamp = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
     file_name = f"data_{timestamp}.csv"
-    par_dir="D:/matlab/ymaps_code/data/"
+    par_dir=askdirectory()
+    
     path= os.path.join(par_dir+datestamp)
     
     if not os.path.exists(path): 
