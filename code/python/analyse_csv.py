@@ -53,7 +53,7 @@ def get_fft(filename,path):
     
     nameofc=['e1','e2','e3','T7','C3','C4','T8']
     
-    eeg_df=pd.read_csv(path+"/"+filename)
+    eeg_df=pd.read_csv(path+"/"+filename,header=None,on_bad_lines='skip')
     
     try:
         eeg_df.columns=['e1','e2','e3','T7','C3','C4','T8']
@@ -120,8 +120,9 @@ def plotter_eeg(file_name,filepath,eeg1,eeg2,eeg3,eeg4,T):
     plt.title('EEG T8')
     plt.grid(linestyle = ':', linewidth = 0.5)
     plt.tight_layout()
+    plt.savefig(filepath+'/'+'VvsT_'+file_name.replace('.csv','')+'.svg')    
     plt.show()
-    plt.savefig(filepath+'/'+'VvsT_'+'.jpg')    
+    
     
 def plotter_fft(file_name,filepath,E1,E2,E3,E4,N,T,freq,eeg1,eeg2,eeg3,eeg4):
     plt.style.use('dark_background')
@@ -152,8 +153,10 @@ def plotter_fft(file_name,filepath,E1,E2,E3,E4,N,T,freq,eeg1,eeg2,eeg3,eeg4):
     plt.xlim(0, 20)
     plt.grid(linestyle = ':', linewidth = 0.5)
     plt.tight_layout()
+    plt.savefig(filepath+'/'+'fftT7freq_'+file_name.replace('.csv','')+'.svg')
+    
     plt.show()
-    plt.savefig(filepath+'/'+'fftT7freq_'+'.jpg')
+    
     plt.subplot(311)
 
     plt.plot(T,eeg2,'r',linewidth=0.5)
@@ -182,8 +185,9 @@ def plotter_fft(file_name,filepath,E1,E2,E3,E4,N,T,freq,eeg1,eeg2,eeg3,eeg4):
     plt.xlim(0, 20)
     plt.tight_layout()
     plt.grid(linestyle = ':', linewidth = 0.5)
+    plt.savefig(filepath+'/'+'fftC3freq_'+file_name.replace('.csv','')+'.svg')
     plt.show()
-    plt.savefig(filepath+'/'+'fftC3freq_'+'.jpg')
+    
 
     plt.subplot(311)
 
@@ -212,9 +216,10 @@ def plotter_fft(file_name,filepath,E1,E2,E3,E4,N,T,freq,eeg1,eeg2,eeg3,eeg4):
     plt.xlim(0, 20)
     plt.tight_layout()
     plt.grid(linestyle = ':', linewidth = 0.5)
+    plt.savefig(filepath+'/'+'fftC4freq_'+file_name.replace('.csv','')+'.svg')
     plt.show()
 
-    plt.savefig(filepath+'/'+'fftC4freq_'+'.jpg')
+    
     plt.subplot(311)
 
     plt.plot(T,eeg4,'r',linewidth=0.5)
@@ -240,8 +245,9 @@ def plotter_fft(file_name,filepath,E1,E2,E3,E4,N,T,freq,eeg1,eeg2,eeg3,eeg4):
     plt.xlim(0, 20)
     plt.grid(linestyle = ':', linewidth = 0.5)
     plt.tight_layout()
+    plt.savefig(filepath+'/'+'fftT8freq_'+file_name.replace('.csv','')+'.svg')
     plt.show()
-    plt.savefig(filepath+'/'+'fftT8freq_'+'.jpg')
+    
 
 
 def plotter_psd(file_name,filepath,eeg1,eeg2,eeg3,eeg4,s_f,T):
@@ -276,9 +282,10 @@ def plotter_psd(file_name,filepath,eeg1,eeg2,eeg3,eeg4,s_f,T):
     ax2.set_xlabel('Time in s')
     ax2.set_title('PSD of T7')
     ax2.grid(linewidth=0.5,linestyle=':',color='green')
-    plt.show()
-    plt.savefig(filepath+'/'+'psdT7freq_'+'.jpg')
+    plt.savefig(filepath+'/'+'psdT7freq_'+file_name.replace('.csv','')+'.svg')
 
+    plt.show()
+  
     plt.style.use('dark_background')
     fig,(ax1,ax2) =plt.subplots(nrows=2,layout='constrained')
 
@@ -302,8 +309,9 @@ def plotter_psd(file_name,filepath,eeg1,eeg2,eeg3,eeg4,s_f,T):
     ax2.set_xlabel('Time in s')
     ax2.set_title('PSD of C3')
     ax2.grid(linewidth=0.5,linestyle=':',color='green')
+    plt.savefig(filepath+'/'+'psdC3freq_'+file_name.replace('.csv','')+'.svg')
     plt.show()
-    plt.savefig(filepath+'/'+'psdC3freq_'+'.jpg')
+    
     plt.style.use('dark_background')
     fig,(ax1,ax2) =plt.subplots(nrows=2,layout='constrained')
 
@@ -327,8 +335,9 @@ def plotter_psd(file_name,filepath,eeg1,eeg2,eeg3,eeg4,s_f,T):
     ax2.set_xlabel('Time in s')
     ax2.set_title('PSD of C4')
     ax2.grid(linewidth=0.5,linestyle=':',color='green')
+    plt.savefig(filepath+'/'+'psdC4freq_'+file_name.replace('.csv','')+'.svg')
     plt.show()
-    plt.savefig(filepath+'/'+'psdC4freq_'+'.jpg')
+    
     plt.style.use('dark_background')
     fig,(ax1,ax2) =plt.subplots(nrows=2,layout='constrained')
 
@@ -352,13 +361,14 @@ def plotter_psd(file_name,filepath,eeg1,eeg2,eeg3,eeg4,s_f,T):
     ax2.set_xlabel('Time in s')
     ax2.set_title('PSD of T8')
     ax2.grid(linewidth=0.5,linestyle=':',color='green')
+    plt.savefig(filepath+'/'+'psdT8freq_'+file_name.replace('.csv','')+'.svg')
     plt.show()
-    plt.savefig(filepath+'/'+'psdT8freq_'+'.jpg')
+    
 def main(i):
+    
     path_=askdirectory()
     filen=askopenfilename().split('/').pop()
     get_sampling_freq(filen,path_)
-
     get_fft(filen,path_)
         
 if __name__=="__main__":
