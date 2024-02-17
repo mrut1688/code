@@ -120,8 +120,8 @@ def get_fft(filename,path):
     s_f=len(eeg1)/120
     t_f=1/s_f
     T=np.arange(0,120,t_f)
-    plotter_eeg(filename,path,eeg1,eeg2,eeg3,eeg4,T)
-    
+    fig1 = plotter_eeg(filename,path,eeg1,eeg2,eeg3,eeg4,T)
+
     E1=np.fft.fft(eeg1)
     E2=np.fft.fft(eeg2)
     E3=np.fft.fft(eeg3)
@@ -130,13 +130,16 @@ def get_fft(filename,path):
     N=np.arange(len(E1))
     T_f=len(E1)/s_f
     freq=N/T_f
-    plotter_fft(filename,path,E1,E2,E3,E4,T_f,freq=freq,T=T,eeg1=eeg1,eeg2=eeg2,eeg3=eeg3,eeg4=eeg4)
-    plotter_psd(filename,path,eeg1,eeg2,eeg3,eeg4,s_f,T)
+    fig2 = plotter_fft(filename,path,E1,E2,E3,E4,T_f,freq=freq,T=T,eeg1=eeg1,eeg2=eeg2,eeg3=eeg3,eeg4=eeg4)
+    fig3 = plotter_psd(filename,path,eeg1,eeg2,eeg3,eeg4,s_f,T)
+    return fig1, fig2, fig3
+
 
 def plotter_eeg(file_name,filepath,eeg1,eeg2,eeg3,eeg4,T):
     
     plt.style.use('dark_background')
     
+<<<<<<< HEAD
     # eeg1_=eeg1.to_numpy()
     # eeg1_=eeg1_.reshape(len(eeg1),)
     # eeg2_=eeg2.to_numpy().reshape(len(eeg1),)
@@ -144,6 +147,9 @@ def plotter_eeg(file_name,filepath,eeg1,eeg2,eeg3,eeg4,T):
     # eeg4_=eeg4.to_numpy().reshape(len(eeg1),)
     
     plt.Figure(edgecolor='red')
+=======
+    fig1 = plt.Figure(edgecolor='red')
+>>>>>>> 4fe8b1eec23867e762bdd0e02192ed599ffa98d3
     plt.subplot(2,2,1)
     
    
@@ -175,14 +181,19 @@ def plotter_eeg(file_name,filepath,eeg1,eeg2,eeg3,eeg4,T):
     plt.xlabel('Time-s')
     plt.title('EEG T8')
     plt.grid(linestyle = ':', linewidth = 0.5)
-    plt.tight_layout()
+    # plt.tight_layout()
     # plt.savefig(filepath+'/'+'VvsT_'+file_name.replace('.csv','')+'.svg')
+<<<<<<< HEAD
     plt.show()
+=======
+    # plt.show()
+    return fig1
+>>>>>>> 4fe8b1eec23867e762bdd0e02192ed599ffa98d3
     
     
 def plotter_fft(file_name,filepath,E1,E2,E3,E4,N,T,freq,eeg1,eeg2,eeg3,eeg4):
     plt.style.use('dark_background')
-    plt.Figure(figsize= (10,8))
+    fig1 = plt.Figure(figsize= (10,8))
 
     plt.subplot(311)
 
@@ -208,10 +219,10 @@ def plotter_fft(file_name,filepath,E1,E2,E3,E4,N,T,freq,eeg1,eeg2,eeg3,eeg4):
     plt.ylabel('FFT '+r'$20log_{10}$'+'|T7(freq)| '+r'$db$')
     plt.xlim(0, 20)
     plt.grid(linestyle = ':', linewidth = 0.5)
-    plt.tight_layout()
+    # plt.tight_layout()
     plt.savefig(filepath+'/'+'fftT7freq_'+file_name.replace('.csv','')+'.svg')
     
-    plt.show()
+    # plt.show()
     
     plt.subplot(311)
 
@@ -239,10 +250,10 @@ def plotter_fft(file_name,filepath,E1,E2,E3,E4,N,T,freq,eeg1,eeg2,eeg3,eeg4):
     plt.xlabel('Freq (Hz)')
     plt.ylabel('FFT '+r'$20log_{10}$'+'|C3(freq)| '+r'$db$')
     plt.xlim(0, 20)
-    plt.tight_layout()
+    # plt.tight_layout()
     plt.grid(linestyle = ':', linewidth = 0.5)
     plt.savefig(filepath+'/'+'fftC3freq_'+file_name.replace('.csv','')+'.svg')
-    plt.show()
+    # plt.show()
     
 
     plt.subplot(311)
@@ -270,10 +281,10 @@ def plotter_fft(file_name,filepath,E1,E2,E3,E4,N,T,freq,eeg1,eeg2,eeg3,eeg4):
     plt.xlabel('Freq (Hz)')
     plt.ylabel('FFT '+r'$20log_{10}$'+'|C4(freq)| '+r'$db$')
     plt.xlim(0, 20)
-    plt.tight_layout()
+    # plt.tight_layout()
     plt.grid(linestyle = ':', linewidth = 0.5)
     plt.savefig(filepath+'/'+'fftC4freq_'+file_name.replace('.csv','')+'.svg')
-    plt.show()
+    # plt.show()
 
     
     plt.subplot(311)
@@ -300,10 +311,11 @@ def plotter_fft(file_name,filepath,E1,E2,E3,E4,N,T,freq,eeg1,eeg2,eeg3,eeg4):
     plt.ylabel('FFT '+r'$20log_{10}$'+'|T8(freq)| '+r'$db$')
     plt.xlim(0, 20)
     plt.grid(linestyle = ':', linewidth = 0.5)
-    plt.tight_layout()
+    # plt.tight_layout()
     plt.savefig(filepath+'/'+'fftT8freq_'+file_name.replace('.csv','')+'.svg')
-    plt.show()
-    
+    # plt.show()
+
+    return fig1
 
 
 def plotter_psd(file_name,filepath,eeg1,eeg2,eeg3,eeg4,s_f,T):
@@ -316,7 +328,7 @@ def plotter_psd(file_name,filepath,eeg1,eeg2,eeg3,eeg4,s_f,T):
 
 
     plt.style.use('dark_background')
-    fig,(ax1,ax2) =plt.subplots(nrows=2,layout='constrained')
+    fig1,(ax1,ax2) =plt.subplots(nrows=2,layout='constrained')
 
 
     ax1.plot(T,eeg1,'red','--',linewidth=0.2)
@@ -333,17 +345,17 @@ def plotter_psd(file_name,filepath,eeg1,eeg2,eeg3,eeg4,s_f,T):
                             ,vmin=-50)
     ax2.set_ylim(4,20)
     ax2.set_xlim(-0.10,120)
-    fig.colorbar(im,shrink=0.6).set_label('power in '+r'$dB$')
+    fig1.colorbar(im,shrink=0.6).set_label('power in '+r'$dB$')
     ax2.set_ylabel('Frequency')
     ax2.set_xlabel('Time in s')
     ax2.set_title('PSD of T7')
     ax2.grid(linewidth=0.5,linestyle=':',color='green')
     plt.savefig(filepath+'/'+'psdT7freq_'+file_name.replace('.csv','')+'.svg')
 
-    plt.show()
+    # plt.show()
   
     plt.style.use('dark_background')
-    fig,(ax1,ax2) =plt.subplots(nrows=2,layout='constrained')
+    fig2,(ax1,ax2) =plt.subplots(nrows=2,layout='constrained')
 
 
     ax1.plot(T,eeg2_,'red','--',linewidth=0.2)
@@ -360,16 +372,16 @@ def plotter_psd(file_name,filepath,eeg1,eeg2,eeg3,eeg4,s_f,T):
                             ,vmin=-50)
     ax2.set_ylim(4,20)
     ax2.set_xlim(-0.10,120)
-    fig.colorbar(im,shrink=0.6).set_label('power in '+r'$dB$')
+    fig2.colorbar(im,shrink=0.6).set_label('power in '+r'$dB$')
     ax2.set_ylabel('Frequency')
     ax2.set_xlabel('Time in s')
     ax2.set_title('PSD of C3')
     ax2.grid(linewidth=0.5,linestyle=':',color='green')
     plt.savefig(filepath+'/'+'psdC3freq_'+file_name.replace('.csv','')+'.svg')
-    plt.show()
+    # plt.show()
     
     plt.style.use('dark_background')
-    fig,(ax1,ax2) =plt.subplots(nrows=2,layout='constrained')
+    fig3,(ax1,ax2) =plt.subplots(nrows=2,layout='constrained')
 
 
     ax1.plot(T,eeg3_,'red','--',linewidth=0.2)
@@ -386,16 +398,16 @@ def plotter_psd(file_name,filepath,eeg1,eeg2,eeg3,eeg4,s_f,T):
                             ,vmin=-50)
     ax2.set_ylim(4,20)
     ax2.set_xlim(-0.10,120)
-    fig.colorbar(im,shrink=0.6).set_label('power in '+r'$dB$')
+    fig3.colorbar(im,shrink=0.6).set_label('power in '+r'$dB$')
     ax2.set_ylabel('Frequency')
     ax2.set_xlabel('Time in s')
     ax2.set_title('PSD of C4')
     ax2.grid(linewidth=0.5,linestyle=':',color='green')
     plt.savefig(filepath+'/'+'psdC4freq_'+file_name.replace('.csv','')+'.svg')
-    plt.show()
+    # plt.show()
     
     plt.style.use('dark_background')
-    fig,(ax1,ax2) =plt.subplots(nrows=2,layout='constrained')
+    fig4,(ax1,ax2) =plt.subplots(nrows=2,layout='constrained')
 
 
     ax1.plot(T,eeg4_,'red','--',linewidth=0.2)
@@ -412,14 +424,14 @@ def plotter_psd(file_name,filepath,eeg1,eeg2,eeg3,eeg4,s_f,T):
                             ,vmin=-50)
     ax2.set_ylim(4,20)
     ax2.set_xlim(-0.10,120)
-    fig.colorbar(im,shrink=0.6).set_label('power in '+r'$dB$')
+    fig4.colorbar(im,shrink=0.6).set_label('power in '+r'$dB$')
     ax2.set_ylabel('Frequency')
     ax2.set_xlabel('Time in s')
     ax2.set_title('PSD of T8')
     ax2.grid(linewidth=0.5,linestyle=':',color='green')
     plt.savefig(filepath+'/'+'psdT8freq_'+file_name.replace('.csv','')+'.svg')
-    plt.show()
-
+    # plt.show()
+    return fig1,fig2,fig3,fig4
 def figure_option_eeg(filename,path):
     eeg_df=pandas_framemaker(filename,path)
     eeg1=eeg_df.loc[:,["T7"]]
@@ -466,9 +478,10 @@ def figure_option_eeg(filename,path):
 
     ax4.set_title('EEG C4')
     ax4.grid(linewidth=0.5,linestyle=':',color='green')
-    plt.savefig(filepath+'/'+'VvsT_'+file_name.replace('.csv','')+'.svg')    
-    plt.show()
-    
+    # plt.savefig(filepath+'/'+'VvsT_'+file_name.replace('.csv','')+'.svg')
+    # plt.show()
+    return fig
+
 def figure_option_fft(filename,path):
     eeg_df=pandas_framemaker(filename,path)
     eeg1=eeg_df.loc[:,["T7"]]
