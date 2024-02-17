@@ -170,8 +170,8 @@ def plotter_eeg(file_name,filepath,eeg1,eeg2,eeg3,eeg4,T):
     plt.title('EEG T8')
     plt.grid(linestyle = ':', linewidth = 0.5)
     plt.tight_layout()
-    plt.savefig(filepath+'/'+'VvsT_'+file_name.replace('.csv','')+'.svg')    
-    plt.show()
+    # plt.savefig(filepath+'/'+'VvsT_'+file_name.replace('.csv','')+'.svg')
+    # plt.show()
     
     
 def plotter_fft(file_name,filepath,E1,E2,E3,E4,N,T,freq,eeg1,eeg2,eeg3,eeg4):

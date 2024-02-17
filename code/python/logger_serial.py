@@ -7,17 +7,10 @@ import analyse_csv
 from tkinter import *
 from tkinter.filedialog import askdirectory
 
-while  True:
-    try:
-        ser = serial.Serial('COM7', 115200)
-        break
-    except  serial.serialutil.SerialException:
-        print("connect to comport7")
-        
-
-print(str(ser.readline().decode('utf-8').strip().split(','))
-      .replace("[","").replace("]","").replace("'","")
-      .replace(" ","") + '\n')
+try:
+    ser = serial.Serial('COM7', 115200)
+except  serial.serialutil.SerialException:
+    print("connect to comport7")
 
 def timer_callback():
     global closefile_flag
@@ -208,6 +201,19 @@ def logger_data():
         analyse_csv.get_fft(file_name,path) 
     return file_name,path
 def main(i):
+    global ser
+    while True:
+        try:
+            ser = serial.Serial('COM7', 115200)
+            break
+        except  serial.serialutil.SerialException:
+            print("connect to comport7")
+
+    print(str(ser.readline().decode('utf-8').strip().split(','))
+          .replace("[", "").replace("]", "").replace("'", "")
+          .replace(" ", "") + '\n')
+
+
     while True:
         s=str(input("press s for actual data or press i  for imaginaty data "))
         if(s=='s'):
