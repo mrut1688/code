@@ -2,6 +2,11 @@ import tkinter as tk
 from tkinter import ttk
 import logger_serial as ls
 import analyse_csv as acv
+import sv_ttk
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+import matplotlib.pyplot as plt
+from matplotlib.figure import Figure
+import numpy as np
 
 filename=''
 filepath =''
@@ -54,7 +59,12 @@ class SecondAppWindow(tk.Toplevel):
         if filename == '' and filepath == '':
             acv.main(0)
         else:
-            acv.get_fft(filename,filepath)
+            # Plot the data
+            figure = acv.get_fft(filename,filepath)
+            canvas = FigureCanvasTkAgg(figure, master=top_level)
+            canvas_widget = canvas.get_tk_widget()
+            canvas_widget.pack(fill=tk.BOTH, expand=True)
+            plt.show()
 
 
 class AIAppWindow(tk.Toplevel):
@@ -74,9 +84,10 @@ if __name__ == "__main__":
     root = tk.Tk()
 
     # Set the theme
-    root.tk.call("source", "azure.tcl")
-    root.tk.call("set_theme", "dark")
-    # sv_ttk.set_theme("dark")
+    # root.tk.call("source", "azure.tcl")
+    # root.tk.call("set_theme", "dark")
+    sv_ttk.set_theme("dark")
+
 
     app = MainApp(root)
 
