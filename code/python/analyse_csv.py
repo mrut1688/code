@@ -24,7 +24,7 @@ def pandas_framemaker(filename,path):
 
 def get_sampling_freq(filename,path):
     global sampling_freq_value
-    df=pd.read_csv(path+"/"+filename,sep='delimiter', header=None)
+    df=pd.read_csv(path+"/"+filename, header=None,on_bad_lines='skip')
     length=len(df)
     sampling_freq_value=float(length/120)
     return float(length/120)
@@ -137,6 +137,12 @@ def plotter_eeg(file_name,filepath,eeg1,eeg2,eeg3,eeg4,T):
     
     plt.style.use('dark_background')
     
+    # eeg1_=eeg1.to_numpy()
+    # eeg1_=eeg1_.reshape(len(eeg1),)
+    # eeg2_=eeg2.to_numpy().reshape(len(eeg1),)
+    # eeg3_=eeg3.to_numpy().reshape(len(eeg1),)
+    # eeg4_=eeg4.to_numpy().reshape(len(eeg1),)
+    
     plt.Figure(edgecolor='red')
     plt.subplot(2,2,1)
     
@@ -171,7 +177,7 @@ def plotter_eeg(file_name,filepath,eeg1,eeg2,eeg3,eeg4,T):
     plt.grid(linestyle = ':', linewidth = 0.5)
     plt.tight_layout()
     # plt.savefig(filepath+'/'+'VvsT_'+file_name.replace('.csv','')+'.svg')
-    # plt.show()
+    plt.show()
     
     
 def plotter_fft(file_name,filepath,E1,E2,E3,E4,N,T,freq,eeg1,eeg2,eeg3,eeg4):
@@ -720,6 +726,7 @@ def eeg_muscle_plot(filename,path):
     s_f=len(eeg1)/120
     t_f=1/s_f
     T=np.arange(0,120,t_f)
+    
     time10=int(s_f*10)
     time20=int(s_f*20)
     time30=time20+time10
@@ -735,7 +742,7 @@ def eeg_muscle_plot(filename,path):
     
    
     plt.style.use('dark_background')
-    fig,(ax1,ax2,ax3,ax4) =plt.subplots(nrows=2,ncols=2,sharex='col',sharey='row',layout='constrained')
+    fig,((ax1,ax2),(ax3,ax4)) =plt.subplots(nrows=2,ncols=2,sharex='col')
     #fig,(ax1)=plt.subplots(1,sharey=True,sharex=True,layout='constrained')
     ax1.plot(T,eeg1,'white','--',linewidth=0.3)
     ti_0=0
@@ -763,12 +770,12 @@ def eeg_muscle_plot(filename,path):
 
     ax2.set_title('EEG C3')
     ax2.grid(linewidth=0.5,linestyle=':',color='green')
-    ax3.plot(T,eeg3,'blue','--',linewidth=0.2)
+    ax3.plot(T,eeg3,'white','--',linewidth=0.2)
     ti_0=0
-    ax1.axvspan(T[ti_0],T[time10] ,facecolor='red', alpha=0.3)
+    ax3.axvspan(T[ti_0],T[time10] ,facecolor='red', alpha=0.3)
     ti_0=time10+1
     for ti,co in zip(time__,colo):
-        ax1.axvspan(T[ti_0],T[ti-1] ,facecolor=co, alpha=0.3)
+        ax3.axvspan(T[ti_0],T[ti-1] ,facecolor=co, alpha=0.3)
         ti_0=ti
     ax3.set_ylabel('signal in V')
     ax3.set_xlabel('Time in s')
@@ -779,7 +786,12 @@ def eeg_muscle_plot(filename,path):
     ax3.grid(linewidth=0.5,linestyle=':',color='green')
     
     ax4.plot(T,eeg4,'white','--',linewidth=0.2)
-
+    ti_0=0
+    ax4.axvspan(T[ti_0],T[time10] ,facecolor='red', alpha=0.3)
+    ti_0=time10+1
+    for ti,co in zip(time__,colo):
+        ax4.axvspan(T[ti_0],T[ti-1] ,facecolor=co, alpha=0.3)
+        ti_0=ti
     ax4.set_ylabel('signal in V')
     ax4.set_xlabel('Time in s')
     ax4.set_xlim(-0.1,120)
@@ -787,7 +799,7 @@ def eeg_muscle_plot(filename,path):
 
     ax4.set_title('EEG C4')
     ax4.grid(linewidth=0.5,linestyle=':',color='green')
-    plt.savefig(filepath+'/'+'VvsT_ms'+file_name.replace('.csv','')+'.svg')    
+    plt.savefig(path+'/'+'VvsT_ms'+filename.replace('.csv','')+'.svg')    
     plt.show()
 
 
@@ -797,7 +809,9 @@ def main(i):
     path_=askdirectory()
     filen=askopenfilename().split('/').pop()
     get_sampling_freq(filen,path_)
-    get_fft(filen,path_)
+    #get_fft(filen,path_)
+    eeg_muscle_plot(filen,path_)
+    
     return filen,path_
     
 if __name__=="__main__":

@@ -200,7 +200,7 @@ def logger_data():
     if next==Y :
         analyse_csv.get_fft(file_name,path) 
     return file_name,path
-def main(i):
+def main(a):
     global ser
     while True:
         try:
@@ -216,13 +216,15 @@ def main(i):
 
     while True:
         s=str(input("press s for actual data or press i  for imaginaty data "))
-        if(s=='s'):
+        if(a=='s'):
             file_name,path=logger_data()
+            break
             s=''
         if(s=='i'):
             file_name,path=logger_data_img()
+            break
             s=''
     return file_name,path
         
 if __name__=="__main__":
-    main(0)
+    main('s')

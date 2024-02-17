@@ -53,7 +53,7 @@ class SecondAppWindow(tk.Toplevel):
 
     def logdatafile(self):
         global filename, filepath
-        filename,filepath = ls.main(0)
+        filename,filepath = ls.main(a)
 
     def visualise(self):
         if filename == '' and filepath == '':
@@ -61,10 +61,11 @@ class SecondAppWindow(tk.Toplevel):
         else:
             # Plot the data
             figure = acv.get_fft(filename,filepath)
-            canvas = FigureCanvasTkAgg(figure, master=top_level)
+            canvas = FigureCanvasTkAgg(figure[1], master=top_level)
+            canvas.draw()
             canvas_widget = canvas.get_tk_widget()
             canvas_widget.pack(fill=tk.BOTH, expand=True)
-            plt.show()
+            # plt.show()
 
 
 class AIAppWindow(tk.Toplevel):
