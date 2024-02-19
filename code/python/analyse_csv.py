@@ -430,7 +430,7 @@ def figure_option_eeg(filename,path):
     t_f=1/s_f
     T=np.arange(0,120,t_f)
     plt.style.use('dark_background')
-    fig,(ax1,ax2,ax3,ax4) =plt.subplots(nrows=2,ncols=2,sharex='col',sharey='row',layout='constrained')
+    fig,((ax1,ax2),(ax3,ax4)) =plt.subplots(nrows=2,ncols=2,sharex='col',sharey='row',layout='constrained')
     ax1.plot(T,eeg1,'red','--',linewidth=0.2)
 
     ax1.set_ylabel('signal in V')
@@ -857,16 +857,16 @@ def main(i):
     
     path_=askdirectory()
     filen=askopenfilename().split('/').pop()
-    get_sampling_freq(filen,path_)
-    #get_fft(filen,path_)
+    # get_sampling_freq(filen,path_)
+    # #get_fft(filen,path_)
     # eeg_muscle_plot(filen,path_)
     
     # figure_option_fft(filen,path_)
     
-    figure_option_psdT7(filen,path_)
-    figure_option_psdC3(filen,path_)
-    figure_option_psdC4(filen,path_)
-    figure_option_psdT8(filen,path_)
+    # figure_option_psdT7(filen,path_)
+    # figure_option_psdC3(filen,path_)
+    # figure_option_psdC4(filen,path_)
+    # figure_option_psdT8(filen,path_)
     
     return filen,path_
     

@@ -142,7 +142,7 @@ def logger_data_img():
     sampling_freq=analyse_csv.get_sampling_freq(file_name,path)    
     messagebox.showinfo('alert','data was sampled at rate of'+sampling_freq+r'$Hz$')
     analyse_csv.muscle_state(file_name,path)
-    
+    return file_name,path
  
 def logger_data():
     global closefile_flag
@@ -167,7 +167,7 @@ def logger_data():
         os.mkdir(path)
     file_path_name=path+"/"+file_name
     file= open(file_path_name, "w") 
-    messagebox.showinfo('alert',"File created:", file_name)    
+    messagebox.showinfo('alert',"File created:"+ file_name)    
     closefile_flag=0
     
     
@@ -196,7 +196,7 @@ def logger_data():
     sampling_freq=analyse_csv.get_sampling_freq(file_name,path)    
     messagebox.showinfo('alert','data was sampled at rate of'+sampling_freq+r'$Hz$')
     analyse_csv.muscle_state(file_name,path)
-    
+    return file_name,path
     
 def main(a):
     global ser

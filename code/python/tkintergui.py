@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import ttk
-import logger_serial as ls
+import logger_d_gui_asset as ls
 import analyse_csv as acv
 import sv_ttk
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
@@ -14,7 +14,7 @@ class MainApp:
     def __init__(self, master):
         self.master = master
         self.master.title("Main Application")
-        self.master.geometry("500x400")
+        self.master.geometry("600x500")
 
         # Create the widgets for the second app
         self.notebook = ttk.Notebook(self.master)
@@ -51,9 +51,22 @@ class MainApp:
         actual = ttk.Button(self.tab3, text="Actual data", command=self.actual)
         actual.pack(pady=20)
 
-        imaginary = ttk.Button(self.tab3, text="Imaginary data", command=self.visualise)
+        imaginary = ttk.Button(self.tab3, text="Imaginary data", command=self.imaginary)
         imaginary.pack(pady=20)
-
+        eegpl=ttk.Button(self.tab4,text='Plot eeg signal vs Time',command=self.eegplot)
+        eegpl.pack(pady=20)
+        
+        fftpl=ttk.Button(self.tab4,text='plot FFT of EEG chx',command=self.fftplot)
+        fftpl.pack(pady=20)
+        
+        psdpl1=ttk.Button(self.tab4,text='PSD of EEG chx T7',command=self.psdplotT7)
+        psdpl1.pack(pady=20)
+        psdpl2=ttk.Button(self.tab4,text='PSD of EEG chx C3',command=self.psdplotC3)
+        psdpl2.pack(pady=20)
+        psdpl3=ttk.Button(self.tab4,text='PSD of EEG chx C4',command=self.psdplotC4)
+        psdpl3.pack(pady=20)
+        psdpl4=ttk.Button(self.tab4,text='PSD of EEG chx T8',command=self.psdplotT8)
+        psdpl4.pack(pady=20)
 # class Redirect():
 
 #     def __init__(self, widget):
@@ -68,14 +81,104 @@ class MainApp:
         
 
     
-    def visualise(self):
+    def imaginary(self):
         global filename, filepath
         filename, filepath = ls.logger_data_img()
-        # if filename == '' and filepath == '':
-        #     acv.main(0)
+    
+    def eegplot(self):
+        global filename,filepath
+              
+    
+        if filename == '' and filepath == '':
+            filename, filepath = acv.main(0)
+            acv.figure_option_eeg(filename,filepath)
         #
-        # else:
-        #     # Plot the data
+        else:
+            acv.figure_option_eeg(filename,filepath)
+            plt.show()
+            
+    
+    def eegemgplot(self):
+        global filename,filepath
+        
+        
+    
+        if filename == '' and filepath == '':
+            filename, filepath = acv.main(0)
+            acv.eeg_muscle_plot(filename,filepath)
+        #
+        else:
+            acv.eeg_muscle_plot(filename,filepath)
+
+    def fftplot(self):
+        global filename,filepath
+        
+        
+    
+        if filename == '' and filepath == '':
+            filename, filepath = acv.main(0)
+            acv.figure_option_fft(filename,filepath)        
+        #
+        else:
+            acv.figure_option_fft(filename,filepath)
+            
+            
+    def psdplotT7(self):
+        global filename,filepath
+        
+        
+    
+        if filename == '' and filepath == '':
+           filename, filepath =  acv.main(0)
+           acv.figure_option_psdT7(filename,filepath)
+        #
+        else:
+            acv.figure_option_psdT7(filename,filepath)
+            
+       
+    def psdplotC3(self):
+       global filename,filepath
+        
+        
+    
+       if filename == '' and filepath == '':
+            filename, filepath = acv.main(0)
+            acv.figure_option_psdC3(filename,filepath)
+            
+        #
+       else:
+            acv.figure_option_psdC3(filename,filepath)
+             
+            
+    def psdplotT8(self):
+       global filename,filepath
+        
+        
+    
+       if filename == '' and filepath == '':
+            filename, filepath = acv.main(0)
+            acv.figure_option_psdT8(filename,filepath)
+            
+        #
+       else:
+            acv.figure_option_psdT8(filename,filepath)
+              
+              
+    
+    def psdplotC4(self):
+       global filename,filepath
+        
+        
+    
+       if filename == '' and filepath == '':
+           filename, filepath =  acv.main(0)
+           acv.figure_option_psdC4(filename,filepath)
+             
+        #
+       else:
+            acv.figure_option_psdC4(filename,filepath)
+             
+            
         #     # figure1,figure2,figure3 = acv.get_fft(filename,filepath)
         #     fig1 = acv.figure_option_eeg(filename, filepath)
         #     top_level = tk.Toplevel(self.master)
@@ -109,7 +212,7 @@ if __name__ == "__main__":
     root = tk.Tk()
 
     # Set the theme
-    # root.tk.call('source', 'azure.tcl')
+    # root.tk.call('source', "D:/matlab/ymaps_code/code/python/azure.tcl")
     # root.tk.call("set_theme", "dark")
     sv_ttk.set_theme("dark")
 
