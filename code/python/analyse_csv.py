@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import os 
 from tkinter import *
 from tkinter.filedialog import askdirectory,askopenfilename
-
+import matplotlib as mpl
 
 sampling_freq_value=0
 def ms_pdf(filename,path):
@@ -139,17 +139,7 @@ def plotter_eeg(file_name,filepath,eeg1,eeg2,eeg3,eeg4,T):
     
     plt.style.use('dark_background')
     
-<<<<<<< HEAD
-    # eeg1_=eeg1.to_numpy()
-    # eeg1_=eeg1_.reshape(len(eeg1),)
-    # eeg2_=eeg2.to_numpy().reshape(len(eeg1),)
-    # eeg3_=eeg3.to_numpy().reshape(len(eeg1),)
-    # eeg4_=eeg4.to_numpy().reshape(len(eeg1),)
-    
-    plt.Figure(edgecolor='red')
-=======
     fig1 = plt.Figure(edgecolor='red')
->>>>>>> 4fe8b1eec23867e762bdd0e02192ed599ffa98d3
     plt.subplot(2,2,1)
     
    
@@ -183,12 +173,9 @@ def plotter_eeg(file_name,filepath,eeg1,eeg2,eeg3,eeg4,T):
     plt.grid(linestyle = ':', linewidth = 0.5)
     # plt.tight_layout()
     # plt.savefig(filepath+'/'+'VvsT_'+file_name.replace('.csv','')+'.svg')
-<<<<<<< HEAD
     plt.show()
-=======
     # plt.show()
     return fig1
->>>>>>> 4fe8b1eec23867e762bdd0e02192ed599ffa98d3
     
     
 def plotter_fft(file_name,filepath,E1,E2,E3,E4,N,T,freq,eeg1,eeg2,eeg3,eeg4):
@@ -220,7 +207,7 @@ def plotter_fft(file_name,filepath,E1,E2,E3,E4,N,T,freq,eeg1,eeg2,eeg3,eeg4):
     plt.xlim(0, 20)
     plt.grid(linestyle = ':', linewidth = 0.5)
     # plt.tight_layout()
-    plt.savefig(filepath+'/'+'fftT7freq_'+file_name.replace('.csv','')+'.svg')
+    # plt.savefig(filepath+'/'+'fftT7freq_'+file_name.replace('.csv','')+'.svg')
     
     # plt.show()
     
@@ -252,7 +239,7 @@ def plotter_fft(file_name,filepath,E1,E2,E3,E4,N,T,freq,eeg1,eeg2,eeg3,eeg4):
     plt.xlim(0, 20)
     # plt.tight_layout()
     plt.grid(linestyle = ':', linewidth = 0.5)
-    plt.savefig(filepath+'/'+'fftC3freq_'+file_name.replace('.csv','')+'.svg')
+    # plt.savefig(filepath+'/'+'fftC3freq_'+file_name.replace('.csv','')+'.svg')
     # plt.show()
     
 
@@ -283,7 +270,7 @@ def plotter_fft(file_name,filepath,E1,E2,E3,E4,N,T,freq,eeg1,eeg2,eeg3,eeg4):
     plt.xlim(0, 20)
     # plt.tight_layout()
     plt.grid(linestyle = ':', linewidth = 0.5)
-    plt.savefig(filepath+'/'+'fftC4freq_'+file_name.replace('.csv','')+'.svg')
+    # plt.savefig(filepath+'/'+'fftC4freq_'+file_name.replace('.csv','')+'.svg')
     # plt.show()
 
     
@@ -312,7 +299,8 @@ def plotter_fft(file_name,filepath,E1,E2,E3,E4,N,T,freq,eeg1,eeg2,eeg3,eeg4):
     plt.xlim(0, 20)
     plt.grid(linestyle = ':', linewidth = 0.5)
     # plt.tight_layout()
-    plt.savefig(filepath+'/'+'fftT8freq_'+file_name.replace('.csv','')+'.svg')
+    # 
+    # plt.savefig(filepath+'/'+'fftT8freq_'+file_name.replace('.csv','')+'.svg')
     # plt.show()
 
     return fig1
@@ -350,7 +338,7 @@ def plotter_psd(file_name,filepath,eeg1,eeg2,eeg3,eeg4,s_f,T):
     ax2.set_xlabel('Time in s')
     ax2.set_title('PSD of T7')
     ax2.grid(linewidth=0.5,linestyle=':',color='green')
-    plt.savefig(filepath+'/'+'psdT7freq_'+file_name.replace('.csv','')+'.svg')
+    # plt.savefig(filepath+'/'+'psdT7freq_'+file_name.replace('.csv','')+'.svg')
 
     # plt.show()
   
@@ -377,7 +365,7 @@ def plotter_psd(file_name,filepath,eeg1,eeg2,eeg3,eeg4,s_f,T):
     ax2.set_xlabel('Time in s')
     ax2.set_title('PSD of C3')
     ax2.grid(linewidth=0.5,linestyle=':',color='green')
-    plt.savefig(filepath+'/'+'psdC3freq_'+file_name.replace('.csv','')+'.svg')
+    # plt.savefig(filepath+'/'+'psdC3freq_'+file_name.replace('.csv','')+'.svg')
     # plt.show()
     
     plt.style.use('dark_background')
@@ -403,7 +391,7 @@ def plotter_psd(file_name,filepath,eeg1,eeg2,eeg3,eeg4,s_f,T):
     ax2.set_xlabel('Time in s')
     ax2.set_title('PSD of C4')
     ax2.grid(linewidth=0.5,linestyle=':',color='green')
-    plt.savefig(filepath+'/'+'psdC4freq_'+file_name.replace('.csv','')+'.svg')
+    # plt.savefig(filepath+'/'+'psdC4freq_'+file_name.replace('.csv','')+'.svg')
     # plt.show()
     
     plt.style.use('dark_background')
@@ -429,7 +417,7 @@ def plotter_psd(file_name,filepath,eeg1,eeg2,eeg3,eeg4,s_f,T):
     ax2.set_xlabel('Time in s')
     ax2.set_title('PSD of T8')
     ax2.grid(linewidth=0.5,linestyle=':',color='green')
-    plt.savefig(filepath+'/'+'psdT8freq_'+file_name.replace('.csv','')+'.svg')
+    # plt.savefig(filepath+'/'+'psdT8freq_'+file_name.replace('.csv','')+'.svg')
     # plt.show()
     return fig1,fig2,fig3,fig4
 def figure_option_eeg(filename,path):
@@ -479,8 +467,8 @@ def figure_option_eeg(filename,path):
     ax4.set_title('EEG C4')
     ax4.grid(linewidth=0.5,linestyle=':',color='green')
     # plt.savefig(filepath+'/'+'VvsT_'+file_name.replace('.csv','')+'.svg')
-    # plt.show()
-    return fig
+    plt.show()
+    
 
 def figure_option_fft(filename,path):
     eeg_df=pandas_framemaker(filename,path)
@@ -491,20 +479,22 @@ def figure_option_fft(filename,path):
     s_f=len(eeg1)/120
     t_f=1/s_f
     T=np.arange(0,120,t_f)
-    N=np.arange(len(E1))
-    T_f=len(E1)/s_f
-    freq=N/T_f
+    if len(T)!=len(eeg1):
+        T=np.arange(0,120-t_f,t_f)
     E1=np.fft.fft(eeg1)
     E2=np.fft.fft(eeg2)
     E3=np.fft.fft(eeg3)
     E4=np.fft.fft(eeg4)
+    N=np.arange(len(E1))
+    T_f=len(E1)/s_f
+    freq=N/T_f
     
     fig,(ax)=plt.subplots(nrows=3,ncols=4,layout='constrained')
     ax[0,0].plot(T,eeg1,'red','--',linewidth=0.2)
     ax[0,0].set_ylabel('signal in V')
     ax[0,0].set_xlabel('Time in s')
     ax[0,0].set_xlim(-0.1,120)
-    ax[0.0].set_title('EEG T7')
+    ax[0,0].set_title('EEG T7')
     ax[0,0].grid(linewidth=0.5,linestyle=':',color='green')
     ax[0,1].plot(T,eeg2,'green','--',linewidth=0.2)
 
@@ -539,27 +529,27 @@ def figure_option_fft(filename,path):
     ax[1,0].plot(freq, np.abs(E1), 'g',linewidth=0.5)
     ax[1,0].set_xlabel('Freq (Hz)')
     ax[1,0].set_ylabel('FFT Amplitude |T7(freq)|')
-    ax[1,0].xlim(0, 20)
+    ax[1,0].set_xlim(0, 20)
     ax[1,0].grid(linestyle = ':', linewidth = 0.5)
     
     ax[2,0].plot(freq,20*np.log10(np.abs(E1)), 'b',linewidth=0.5)
     ax[2,0].set_xlabel('Freq (Hz)')
     ax[2,0].set_ylabel('FFT '+r'$20log_{10}$'+'|T7(freq)| '+r'$db$')
-    ax[2,0].xlim(0, 20)
+    ax[2,0].set_xlim(0, 20)
     ax[2,0].grid(linestyle = ':', linewidth = 0.5)
     
     
     ax[1,1].plot(freq, np.abs(E2), 'g',linewidth=0.5)
     ax[1,1].set_xlabel('Freq (Hz)')
     ax[1,1].set_ylabel('FFT Amplitude |C3(freq)|')
-    ax[1,1].xlim(0, 20)
+    ax[1,1].set_xlim(0, 20)
     ax[1,1].grid(linestyle = ':', linewidth = 0.5)
     
     #ax[2,1].plot(freq,20*np.log10(np.abs(E2)), 'b',linewidth=0.5)
     ax[2,1].plot(freq,20*np.log10(np.abs(E1)), 'b',linewidth=0.5)
     ax[2,1].set_xlabel('Freq (Hz)')
     ax[2,1].set_ylabel('FFT '+r'$20log_{10}$'+'|C3(freq)| '+r'$db$')
-    ax[2,1].xlim(0, 20)
+    ax[2,1].set_xlim(0, 20)
     ax[2,1].grid(linestyle = ':', linewidth = 0.5)
     
    
@@ -567,30 +557,30 @@ def figure_option_fft(filename,path):
     ax[1,2].plot(freq, np.abs(E3), 'g',linewidth=0.5)
     ax[1,2].set_xlabel('Freq (Hz)')
     ax[1,2].set_ylabel('FFT Amplitude |C4(freq)|')
-    ax[1,2].xlim(0, 20)
+    ax[1,2].set_xlim(0, 20)
     ax[1,2].grid(linestyle = ':', linewidth = 0.5)
     
     #x[2,2].plot(freq,20*np.log10(np.abs(E1)), 'b',linewidth=0.5)
     ax[2,2].plot(freq,20*np.log10(np.abs(E3)), 'b',linewidth=0.5)
     ax[2,2].set_xlabel('Freq (Hz)')
     ax[2,2].set_ylabel('FFT '+r'$20log_{10}$'+'|C4(freq)| '+r'$db$')
-    ax[2,2].xlim(0, 20)
+    ax[2,2].set_xlim(0, 20)
     ax[2,2].grid(linestyle = ':', linewidth = 0.5)
     
    
     ax[1,3].plot(freq, np.abs(E4), 'g',linewidth=0.5)
     ax[1,3].set_xlabel('Freq (Hz)')
     ax[1,3].set_ylabel('FFT Amplitude |T7(freq)|')
-    ax[1,3].xlim(0, 20)
+    ax[1,3].set_xlim(0, 20)
     ax[1,3].grid(linestyle = ':', linewidth = 0.5)
     
     ax[2,3].plot(freq,20*np.log10(np.abs(E4)), 'b',linewidth=0.5)
     #ax[2,3].plot(freq,20*np.log10(np.abs(E1)), 'b',linewidth=0.5)
     ax[2,3].set_xlabel('Freq (Hz)')
     ax[2,3].set_ylabel('FFT '+r'$20log_{10}$'+'|T8(freq)| '+r'$db$')
-    ax[2,3].xlim(0, 20)
+    ax[2,3].set_xlim(0, 20)
     ax[2,3].grid(linestyle = ':', linewidth = 0.5)
-    plt.savefig(filepath+'/'+'fftfreq_'+file_name.replace('.csv','')+'.svg')
+    # plt.savefig(filepath+'/'+'fftfreq_'+file_name.replace('.csv','')+'.svg')
     plt.show()
 
 def figure_option_psdT7(filename,path):
@@ -599,6 +589,8 @@ def figure_option_psdT7(filename,path):
     s_f=len(eeg1)/120
     t_f=1/s_f
     T=np.arange(0,120,t_f)
+    if len(T)!=len(eeg1):
+        T=np.arange(0,120-t_f,t_f)
     plt.style.use('dark_background')
     eeg1_=eeg1.to_numpy().reshape(len(eeg1),)
     fig,(ax1,ax2) =plt.subplots(nrows=2,layout='constrained')
@@ -623,8 +615,7 @@ def figure_option_psdT7(filename,path):
     ax2.set_xlabel('Time in s')
     ax2.set_title('PSD of T7')
     ax2.grid(linewidth=0.5,linestyle=':',color='green')
-    plt.savefig(filepath+'/'+'psdT7freq_'+file_name.replace('.csv','')+'.svg')
-
+    # plt.savefig(filepath+'/'+'psdT7freq_'+file_name.replace('.csv','')+'.svg')
     plt.show()
       
 def figure_option_psdC3(filename,path):
@@ -633,6 +624,8 @@ def figure_option_psdC3(filename,path):
     s_f=len(eeg2)/120
     t_f=1/s_f
     T=np.arange(0,120,t_f)
+    if len(T)!=len(eeg2):
+        T=np.arange(0,120-t_f,t_f)
     plt.style.use('dark_background')
     eeg2_=eeg2.to_numpy().reshape(len(eeg2))
     fig,(ax1,ax2) =plt.subplots(nrows=2,layout='constrained')
@@ -657,7 +650,7 @@ def figure_option_psdC3(filename,path):
     ax2.set_xlabel('Time in s')
     ax2.set_title('PSD of C3')
     ax2.grid(linewidth=0.5,linestyle=':',color='green')
-    plt.savefig(filepath+'/'+'psdC3freq_'+file_name.replace('.csv','')+'.svg')
+    # plt.savefig(filepath+'/'+'psdC3freq_'+file_name.replace('.csv','')+'.svg')
     plt.show()
     
     
@@ -667,6 +660,8 @@ def figure_option_psdC4(filename,path):
     s_f=len(eeg3)/120
     t_f=1/s_f
     T=np.arange(0,120,t_f)
+    if len(T)!=len(eeg3):
+        T=np.arange(0,120-t_f,t_f)
     plt.style.use('dark_background')
     eeg3_=eeg3.to_numpy().reshape(len(eeg3))
     fig,(ax1,ax2) =plt.subplots(nrows=2,layout='constrained')
@@ -691,7 +686,7 @@ def figure_option_psdC4(filename,path):
     ax2.set_xlabel('Time in s')
     ax2.set_title('PSD of C4')
     ax2.grid(linewidth=0.5,linestyle=':',color='green')
-    plt.savefig(filepath+'/'+'psdC4freq_'+file_name.replace('.csv','')+'.svg')
+    # plt.savefig(filepath+'/'+'psdC4freq_'+file_name.replace('.csv','')+'.svg')
     plt.show()
     
 
@@ -701,6 +696,8 @@ def figure_option_psdT8(filename,path):
     s_f=len(eeg4)/120
     t_f=1/s_f
     T=np.arange(0,120,t_f)
+    if len(T)!=len(eeg4):
+        T=np.arange(0,120-t_f,t_f)
     plt.style.use('dark_background')
     eeg4_=eeg4.to_numpy().reshape(len(eeg4))
     fig,(ax1,ax2) =plt.subplots(nrows=2,layout='constrained')
@@ -725,7 +722,7 @@ def figure_option_psdT8(filename,path):
     ax2.set_xlabel('Time in s')
     ax2.set_title('PSD of T8')
     ax2.grid(linewidth=0.5,linestyle=':',color='green')
-    plt.savefig(filepath+'/'+'psdT8freq_'+file_name.replace('.csv','')+'.svg')
+    # plt.savefig(filepath+'/'+'psdT8freq_'+file_name.replace('.csv','')+'.svg')
     plt.show()
 
 def eeg_muscle_plot(filename,path):
@@ -739,6 +736,8 @@ def eeg_muscle_plot(filename,path):
     s_f=len(eeg1)/120
     t_f=1/s_f
     T=np.arange(0,120,t_f)
+    if len(T)!=len(eeg1):
+        T=np.arange(0,120-t_f,t_f)
     
     time10=int(s_f*10)
     time20=int(s_f*20)
@@ -752,12 +751,32 @@ def eeg_muscle_plot(filename,path):
     time=[0,10,20,30,50,70,90,110,120]
     time__=[time30,time50,time110,time130,time150,time200]
     colo=['cyan','#0957ff','red','#ff9b0a','#e2ff08','#ffffff']
+    time1=[0,10,30,50,70,90,110,120]
     
-   
+    colo=['cyan','#0957ff','red','#ff9b0a','#e2ff08','#ffffff']
+    colo1=['red','red','cyan','cyan','#0957ff','#0957ff','red','red','#ff9b0a','#ff9b0a','#e2ff08','#e2ff08','#ffffff']
+    bounds = ['','rest','RSM','RFM','rest','LSM','LFM','Rand.']
     plt.style.use('dark_background')
-    fig,((ax1,ax2),(ax3,ax4)) =plt.subplots(nrows=2,ncols=2,sharex='col')
+    # fig,((ax1,ax2),(ax3,ax4)) =plt.subplots(nrows=2,ncols=2,sharex='col')
     #fig,(ax1)=plt.subplots(1,sharey=True,sharex=True,layout='constrained')
-    ax1.plot(T,eeg1,'white','--',linewidth=0.3)
+    fig = plt.figure(figsize=(12, 12))
+    gs = fig.add_gridspec(nrows=10, ncols=2)
+    ax1 = fig.add_subplot(gs[0:4, 0])
+    cmap = mpl.colors.ListedColormap(colo1)
+    cmap.set_over('0.25')
+    cmap.set_under('0.75')
+
+    
+    try:
+        ax1.plot(T,eeg1,'white','--',linewidth=0.3)
+    except TypeError:
+        eeg1_=eeg1.to_numpy()
+        eeg1_=eeg1_.reshape(len(eeg1),).astype(str)
+        eeg2_=eeg2.to_numpy().reshape(len(eeg1),).astype(str)
+        eeg3_=eeg3.to_numpy().reshape(len(eeg1),).astype(str)
+        eeg4_=eeg4.to_numpy().reshape(len(eeg1),).astype(str)
+        ax1.plot(T,eeg1_,'white','--',linewidth=0.3)
+
     ti_0=0
     ax1.axvspan(T[ti_0],T[time10] ,facecolor='red', alpha=0.3)
     ti_0=time10+1
@@ -769,6 +788,8 @@ def eeg_muscle_plot(filename,path):
     ax1.set_xlim(-0.1,120)
     ax1.set_title('EEG T7')
     ax1.grid(linewidth=0.5,linestyle=':',color='green')
+    
+    ax2 = fig.add_subplot(gs[5:9, 0])
     ax2.plot(T,eeg2,'White','--',linewidth=0.3)
     ti_0=0
     ax2.axvspan(T[ti_0],T[time10] ,facecolor='red', alpha=0.3)
@@ -783,6 +804,8 @@ def eeg_muscle_plot(filename,path):
 
     ax2.set_title('EEG C3')
     ax2.grid(linewidth=0.5,linestyle=':',color='green')
+    
+    ax3 = fig.add_subplot(gs[0:4, 1])
     ax3.plot(T,eeg3,'white','--',linewidth=0.2)
     ti_0=0
     ax3.axvspan(T[ti_0],T[time10] ,facecolor='red', alpha=0.3)
@@ -798,6 +821,7 @@ def eeg_muscle_plot(filename,path):
     ax3.set_title('EEG C3')
     ax3.grid(linewidth=0.5,linestyle=':',color='green')
     
+    ax4 = fig.add_subplot(gs[5:9, 1])
     ax4.plot(T,eeg4,'white','--',linewidth=0.2)
     ti_0=0
     ax4.axvspan(T[ti_0],T[time10] ,facecolor='red', alpha=0.3)
@@ -812,7 +836,19 @@ def eeg_muscle_plot(filename,path):
 
     ax4.set_title('EEG C4')
     ax4.grid(linewidth=0.5,linestyle=':',color='green')
-    plt.savefig(path+'/'+'VvsT_ms'+filename.replace('.csv','')+'.svg')    
+    
+    ax5 = fig.add_subplot(gs[9,0])
+
+    
+    
+    norm = mpl.colors.BoundaryNorm([1,2,3,4,5,6,7], cmap.N)
+
+    cb2 = mpl.colorbar.ColorbarBase(ax5, cmap=cmap,spacing='proportional',boundaries=[1,2,3,4,5,6,7,8],orientation='horizontal')
+    cb2.set_label('muscle states througout 120s of exercise')
+    cb2.set_ticklabels(bounds)
+
+    plt.tight_layout()
+    # plt.savefig(path+'/'+'VvsT_ms'+filename.replace('.csv','')+'.svg')   
     plt.show()
 
 
@@ -823,9 +859,17 @@ def main(i):
     filen=askopenfilename().split('/').pop()
     get_sampling_freq(filen,path_)
     #get_fft(filen,path_)
-    eeg_muscle_plot(filen,path_)
+    # eeg_muscle_plot(filen,path_)
+    
+    # figure_option_fft(filen,path_)
+    
+    figure_option_psdT7(filen,path_)
+    figure_option_psdC3(filen,path_)
+    figure_option_psdC4(filen,path_)
+    figure_option_psdT8(filen,path_)
     
     return filen,path_
+    
     
 if __name__=="__main__":
     main(0)        

@@ -54,37 +54,20 @@ class MainApp:
         imaginary = ttk.Button(self.tab3, text="Imaginary data", command=self.visualise)
         imaginary.pack(pady=20)
 
+# class Redirect():
+
+#     def __init__(self, widget):
+#         self.widget = widget
+
+#     def write(self, text):
+#         self.widget.insert('end', text)
+    
     def actual(self):
         global filename, filepath
-<<<<<<< HEAD
-        filename,filepath = ls.main(a)
-
-    def visualise(self):
-        if filename == '' and filepath == '':
-            acv.main(0)
-        else:
-            # Plot the data
-            figure = acv.get_fft(filename,filepath)
-            canvas = FigureCanvasTkAgg(figure[1], master=top_level)
-            canvas.draw()
-            canvas_widget = canvas.get_tk_widget()
-            canvas_widget.pack(fill=tk.BOTH, expand=True)
-            # plt.show()
-
-
-class AIAppWindow(tk.Toplevel):
-    def __init__(self, master):
-        super().__init__(master)
-        self.title("AI Application")
-        self.geometry("500x400")
-        # self.configure(background="black")
-        self.frame3 = tk.Frame(self, padx=20, pady=30)
-        self.frame3.pack(padx=40, pady=60)
-        label = tk.Label(self.frame3, text="This is the AI app.")
-        label.pack(pady=20)
-=======
         filename, filepath = ls.logger_data()
+        
 
+    
     def visualise(self):
         global filename, filepath
         filename, filepath = ls.logger_data_img()
@@ -119,7 +102,6 @@ class AIAppWindow(tk.Toplevel):
 #
 #         visualise = ttk.Button(self.tab1, text="Visualise", command=self.visualise)
 #         visualise.pack(pady=20)
->>>>>>> 4fe8b1eec23867e762bdd0e02192ed599ffa98d3
 
 
 
@@ -127,9 +109,9 @@ if __name__ == "__main__":
     root = tk.Tk()
 
     # Set the theme
-    root.tk.call("source", "azure.tcl")
-    root.tk.call("set_theme", "dark")
-    # sv_ttk.set_theme("dark")
+    # root.tk.call('source', 'azure.tcl')
+    # root.tk.call("set_theme", "dark")
+    sv_ttk.set_theme("dark")
 
 
     app = MainApp(root)
@@ -140,4 +122,5 @@ if __name__ == "__main__":
     # x_cordinate = int((root.winfo_screenwidth() / 2) - (root.winfo_width() / 2))
     # y_cordinate = int((root.winfo_screenheight() / 2) - (root.winfo_height() / 2))
     # root.geometry("+{}+{}".format(x_cordinate, y_cordinate-20))
+    
     root.mainloop()
