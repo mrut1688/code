@@ -12,7 +12,7 @@ def ret_filename():
     path_=askdirectory()
     filen=askopenfilename()
     
-    return filen
+    return filen,path_
 
 def ica_plots(filen):
     global ica
