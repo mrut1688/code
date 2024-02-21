@@ -490,13 +490,13 @@ def figure_option_fft(filename,path):
     freq=N/T_f
     
     fig,(ax)=plt.subplots(nrows=3,ncols=4,layout='constrained')
-    ax[0,0].plot(T,eeg1,'red','--',linewidth=0.2)
+    ax[0,0].plot(T,eeg1,'#aaaaff','--',linewidth=0.2)
     ax[0,0].set_ylabel('signal in V')
     ax[0,0].set_xlabel('Time in s')
     ax[0,0].set_xlim(-0.1,120)
     ax[0,0].set_title('EEG T7')
-    ax[0,0].grid(linewidth=0.5,linestyle=':',color='green')
-    ax[0,1].plot(T,eeg2,'green','--',linewidth=0.2)
+    ax[0,0].grid(linewidth=0.5,linestyle=':',color='#aaaaff')
+    ax[0,1].plot(T,eeg2,'#aaaaff','--',linewidth=0.2)
 
     ax[0,1].set_ylabel('signal in V')
     ax[0,1].set_xlabel('Time in s')
@@ -504,8 +504,8 @@ def figure_option_fft(filename,path):
     #plt.xlabel('Time-s')
 
     ax[0,1].set_title('EEG C3')
-    ax[0,1].grid(linewidth=0.5,linestyle=':',color='green')
-    ax[0,2].plot(T,eeg3,'blue','--',linewidth=0.2)
+    ax[0,1].grid(linewidth=0.5,linestyle=':',color='#aaaaff')
+    ax[0,2].plot(T,eeg3,'#aaaaff','--',linewidth=0.2)
 
     ax[0,2].set_ylabel('signal in V')
     ax[0,2].set_xlabel('Time in s')
@@ -513,9 +513,9 @@ def figure_option_fft(filename,path):
     #plt.xlabel('Time-s')
 
     ax[0,2].set_title('EEG C3')
-    ax[0,2].grid(linewidth=0.5,linestyle=':',color='green')
+    ax[0,2].grid(linewidth=0.5,linestyle=':',color='#aaaaff')
     
-    ax[0,3].plot(T,eeg4,'white','--',linewidth=0.2)
+    ax[0,3].plot(T,eeg4,'#aaaaff','--',linewidth=0.2)
 
     ax[0,3].set_ylabel('signal in V')
     ax[0,3].set_xlabel('Time in s')
@@ -523,7 +523,7 @@ def figure_option_fft(filename,path):
     #plt.xlabel('Time-s')
 
     ax[0,3].set_title('EEG C4')
-    ax[0,3].grid(linewidth=0.5,linestyle=':',color='green')
+    ax[0,3].grid(linewidth=0.5,linestyle=':',color='#aaaaff')
     
     
     ax[1,0].plot(freq, np.abs(E1), 'g',linewidth=0.5)
@@ -596,7 +596,7 @@ def figure_option_psdT7(filename,path):
     fig,(ax1,ax2) =plt.subplots(nrows=2,layout='constrained')
 
 
-    ax1.plot(T,eeg1_,'red','--',linewidth=0.2)
+    ax1.plot(T,eeg1_,'#b4c6ffff','--',linewidth=0.2)
 
     ax1.set_ylabel('signal in V')
     ax1.set_xlabel('Time in s')
@@ -631,7 +631,7 @@ def figure_option_psdC3(filename,path):
     fig,(ax1,ax2) =plt.subplots(nrows=2,layout='constrained')
 
 
-    ax1.plot(T,eeg2_,'red','--',linewidth=0.2)
+    ax1.plot(T,eeg2_,'#b4c6ffff','--',linewidth=0.2)
 
     ax1.set_ylabel('signal in V')
     ax1.set_xlabel('Time in s')
@@ -667,7 +667,7 @@ def figure_option_psdC4(filename,path):
     fig,(ax1,ax2) =plt.subplots(nrows=2,layout='constrained')
 
 
-    ax1.plot(T,eeg3_,'red','--',linewidth=0.2)
+    ax1.plot(T,eeg3_,'#b4c6ffff','--',linewidth=0.2)
 
     ax1.set_ylabel('signal in V')
     ax1.set_xlabel('Time in s')
@@ -703,7 +703,7 @@ def figure_option_psdT8(filename,path):
     fig,(ax1,ax2) =plt.subplots(nrows=2,layout='constrained')
 
 
-    ax1.plot(T,eeg4_,'red','--',linewidth=0.2)
+    ax1.plot(T,eeg4_,'#b4c6ffff','--',linewidth=0.2)
 
     ax1.set_ylabel('signal in V')
     ax1.set_xlabel('Time in s')
@@ -851,7 +851,11 @@ def eeg_muscle_plot(filename,path):
     # plt.savefig(path+'/'+'VvsT_ms'+filename.replace('.csv','')+'.svg')   
     plt.show()
 
-
+def pass_file_path(i):
+    path_=askdirectory()
+    filen=askopenfilename().split('/').pop()
+    
+    return filen,path_
 
 def main(i):
     
@@ -859,14 +863,14 @@ def main(i):
     filen=askopenfilename().split('/').pop()
     # get_sampling_freq(filen,path_)
     # #get_fft(filen,path_)
-    # eeg_muscle_plot(filen,path_)
+    eeg_muscle_plot(filen,path_)
     
-    # figure_option_fft(filen,path_)
+    figure_option_fft(filen,path_)
     
-    # figure_option_psdT7(filen,path_)
-    # figure_option_psdC3(filen,path_)
-    # figure_option_psdC4(filen,path_)
-    # figure_option_psdT8(filen,path_)
+    figure_option_psdT7(filen,path_)
+    figure_option_psdC3(filen,path_)
+    figure_option_psdC4(filen,path_)
+    figure_option_psdT8(filen,path_)
     
     return filen,path_
     

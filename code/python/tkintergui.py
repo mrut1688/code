@@ -14,7 +14,8 @@ class MainApp:
     def __init__(self, master):
         self.master = master
         self.master.title("Main Application")
-        self.master.geometry("600x500")
+        self.master.geometry("800x800")
+
 
         # Create the widgets for the second app
         self.notebook = ttk.Notebook(self.master)
@@ -55,6 +56,8 @@ class MainApp:
         imaginary.pack(pady=20)
         eegpl=ttk.Button(self.tab4,text='Plot eeg signal vs Time',command=self.eegplot)
         eegpl.pack(pady=20)
+        emgpl=ttk.Button(self.tab4,text='Plot eeg signal vs Time with Muscle-states',command=self.eegemgplot)
+        emgpl.pack(pady=20)
         
         fftpl=ttk.Button(self.tab4,text='plot FFT of EEG chx',command=self.fftplot)
         fftpl.pack(pady=20)
@@ -90,7 +93,7 @@ class MainApp:
               
     
         if filename == '' and filepath == '':
-            filename, filepath = acv.main(0)
+            filename, filepath = acv.pass_file_path(0)
             acv.figure_option_eeg(filename,filepath)
         #
         else:
@@ -104,7 +107,7 @@ class MainApp:
         
     
         if filename == '' and filepath == '':
-            filename, filepath = acv.main(0)
+            filename, filepath = acv.pass_file_path(0)
             acv.eeg_muscle_plot(filename,filepath)
         #
         else:
@@ -116,7 +119,7 @@ class MainApp:
         
     
         if filename == '' and filepath == '':
-            filename, filepath = acv.main(0)
+            filename, filepath = acv.pass_file_path(0)
             acv.figure_option_fft(filename,filepath)        
         #
         else:
@@ -129,7 +132,7 @@ class MainApp:
         
     
         if filename == '' and filepath == '':
-           filename, filepath =  acv.main(0)
+           filename, filepath =  acv.pass_file_path(0)
            acv.figure_option_psdT7(filename,filepath)
         #
         else:
@@ -142,7 +145,7 @@ class MainApp:
         
     
        if filename == '' and filepath == '':
-            filename, filepath = acv.main(0)
+            filename, filepath = acv.pass_file_path(0)
             acv.figure_option_psdC3(filename,filepath)
             
         #
@@ -156,7 +159,7 @@ class MainApp:
         
     
        if filename == '' and filepath == '':
-            filename, filepath = acv.main(0)
+            filename, filepath = acv.pass_file_path(0)
             acv.figure_option_psdT8(filename,filepath)
             
         #
@@ -171,7 +174,7 @@ class MainApp:
         
     
        if filename == '' and filepath == '':
-           filename, filepath =  acv.main(0)
+           filename, filepath =  acv.pass_file_path(0)
            acv.figure_option_psdC4(filename,filepath)
              
         #
@@ -227,3 +230,4 @@ if __name__ == "__main__":
     # root.geometry("+{}+{}".format(x_cordinate, y_cordinate-20))
     
     root.mainloop()
+ 
