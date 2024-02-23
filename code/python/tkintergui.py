@@ -16,7 +16,7 @@ class MainApp:
         self.master = master
         self.master.title("Main Application")
         self.master.geometry("800x800")
-        self.master.iconbitmap('icon.ico')
+
         
         
         # Create the widgets for the second app
@@ -249,6 +249,7 @@ if __name__ == "__main__":
     # root.tk.call('source', "D:/matlab/ymaps_code/code/python/azure.tcl")
     # root.tk.call("set_theme", "dark")
     sv_ttk.set_theme("dark")
+    root.iconbitmap('icon.ico')
 
 
     app = MainApp(root)
