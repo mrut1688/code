@@ -16,7 +16,7 @@ class MainApp:
         self.master = master
         self.master.title("Main Application")
         self.master.geometry("800x800")
-
+        self.master.iconbitmap('icon.ico')
         
         
         # Create the widgets for the second app
