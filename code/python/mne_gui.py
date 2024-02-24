@@ -36,14 +36,18 @@ def ica_plots(filen):
     ica = mne.preprocessing.ICA(n_components=4,max_iter=1000,random_state=99)
     raw1.filter(l_freq=1.0,h_freq=None)
     ica.fit(raw1)
+    
     ica.plot_components()
+    plt.ion()
     
     ica_plot = ica.plot_components()
     
-    plt.style.use('bmh')
+    plt.style.use('ggplot')
     output_file = 'D:/matlab/ymaps_code/data_visualise/plots_mne/output_eeg.fif.gz'
     raw1.save(output_file, overwrite=True)
     ica.plot_overlay(raw1)
+    plt.ion()
+    plt.show()
 
 def muscle_state_exdf(sfreq):
     
@@ -80,12 +84,11 @@ def muscle_state_exdf(sfreq):
 
 
 
-def epoch_plots():
+def epoch_plots(filen):
     global ica
     global df1
     global sfreq
     global raw1
-    plt.style.use('bmh')
     explained_var = np.abs(ica.get_components())
 
     threshold = 0.1  
@@ -123,40 +126,370 @@ def epoch_plots():
     epochs.load_data()
     epochs.filter(l_freq=0.5, h_freq=40)
     evoked=epochs.average()
+    
+    
+    
     evoked_0 = epochs['Rest'].average()
+    # plt.subplot(2,1,1)
+    plt.style.use('ggplot')
     evoked_0.plot()
-    plt.style.use('dark_background')
+    # plt.subplot(2,1,2)
+    plt.style.use('dark_background')      
     evoked_0.plot_topomap(times=[0.1, 0.2, 0.3,0.4])
     evoked_1= epochs['right_hand_slow'].average()
-    plt.style.use('bmh')
+    # plot(2,1,1)
+    plt.style.use('ggplot')
     evoked_1.plot()
+    # plt.subplot(2,1,2)
     plt.style.use('dark_background')
     evoked_1.plot_topomap(times=[0.1, 0.2, 0.3,0.4])
+    
+    
+    
+    # plt.subplot(2,1,1)
     evoked_2 = epochs['right_hand_fast'].average()
-    plt.style.use('bmh')
+    plt.style.use('ggplot')
     evoked_2.plot()
+    # plt.subplot(2,1,2)
     plt.style.use('dark_background')
     evoked_2.plot_topomap(times=[0.1, 0.2, 0.3, 0.4])
+    
+    
+    # plt.subplot(2,1,1)
     evoked_3 = epochs['left_hand_slow'].average()
-    plt.style.use('bmh')
+    plt.style.use('ggplot')
     evoked_3.plot()
+    # plt.subplot(2,1,2)
     plt.style.use('dark_background')
     evoked_3.plot_topomap(times=[0.1, 0.2, 0.3, 0.4])
+    
+    
+    
+    # plt.subplot(2,1,1)
     evoked_4 = epochs['left_hand_fast'].average()
-    plt.style.use('bmh')
+    plt.style.use('ggplot')
     evoked_4.plot()
+    # plt.subplot(2,1,2)
     plt.style.use('dark_background')
     evoked_4.plot_topomap(times=[0.1, 0.2, 0.3, 0.4])
+    
+    
+    
+    # plt.subplot(2,1,1)
     evoked_5 = epochs['random_movement'].average()
-    plt.style.use('bmh')
+    plt.style.use('ggplot')
     evoked_5.plot()
+    # plt.subplot(2,1,2)
     plt.style.use('dark_background')
     evoked_5.plot_topomap(times=[0.1, 0.2, 0.3, 0.4])
+    plt.show()
+  
+def epochp1(filen):
+    global ica
+    global df1
+    global sfreq
+    global raw1
+    explained_var = np.abs(ica.get_components())
+    threshold = 0.1 
+    exclude_components = np.where(explained_var < threshold)[0]
+    ica.exclude = exclude_components
+    raw_clean = ica.apply(raw1, exclude=ica.exclude)
+    target=muscle_state_exdf(sfreq)
+    muscle_df = target
+    events = [
+    [0, 0, 0],  
+    [int(sfreq*10), 0, 1],
+    [int(sfreq*30), 1, 2],
+    [int(sfreq*50), 2, 0],
+    [int(sfreq*70), 0, 3],
+    [int(sfreq*90), 3, 4],
+    [int(sfreq*110), 4, 5]
+    ]
+    event_id = {
+    'Rest': 0,
+    'right_hand_slow': 1,
+    'right_hand_fast': 2,
+    'left_hand_slow': 3,
+    'left_hand_fast': 4,
+    'random_movement': 5
+    } 
+    epochs = mne.Epochs(raw1, events, event_id=event_id, tmin=-0.5, tmax=0.5)
+    epochs.apply_baseline((None, 0))
+    epochs.load_data()
+    epochs.filter(l_freq=0.5, h_freq=40)
+    evoked=epochs.average()
+    evoked_0 = epochs['Rest'].average()
+    # plt.subplot(2,1,1)
+    plt.style.use('ggplot')
+    evoked_0.plot(gfp=True)
+    # # plt.subplot(2,1,2)
+    # plt.style.use('dark_background')      
+    # evoked_0.plot_topomap(times=np.arange(-0.4,0.4,0.1))
+    evoked_0.plot_joint(times=np.arange(-0.4,0.4,0.1))
+    
+def epochp2(filen):
+    global ica
+    global df1
+    global sfreq
+    global raw1
+    explained_var = np.abs(ica.get_components())
+    threshold = 0.1 
+    exclude_components = np.where(explained_var < threshold)[0]
+    ica.exclude = exclude_components
+    raw_clean = ica.apply(raw1, exclude=ica.exclude)
+    target=muscle_state_exdf(sfreq)
+    muscle_df = target
+    events = [
+    [0, 0, 0],  
+    [int(sfreq*10), 0, 1],
+    [int(sfreq*30), 1, 2],
+    [int(sfreq*50), 2, 0],
+    [int(sfreq*70), 0, 3],
+    [int(sfreq*90), 3, 4],
+    [int(sfreq*110), 4, 5]
+    ]
+    event_id = {
+    'Rest': 0,
+    'right_hand_slow': 1,
+    'right_hand_fast': 2,
+    'left_hand_slow': 3,
+    'left_hand_fast': 4,
+    'random_movement': 5
+    } 
+    epochs = mne.Epochs(raw1, events, event_id=event_id, tmin=-0.5, tmax=0.5)
+    epochs.apply_baseline((None, 0))
+    epochs.load_data()
+    epochs.filter(l_freq=0.5, h_freq=40)
+    evoked=epochs.average()
+    evoked_0 = epochs['right_hand_slow'].average()
+    # plt.subplot(2,1,1)
+    # plt.style.use('ggplot')
+    evoked_0.plot()
+    # plt.subplot(2,1,2)
+    plt.style.use('dark_background')      
+    evoked_0.plot_joint(times=np.arange(-0.4,0.4,0.1))   
+    
+    
+def epochp3(filen):
+    global ica
+    global df1
+    global sfreq
+    global raw1
+    explained_var = np.abs(ica.get_components())
+    threshold = 0.1 
+    exclude_components = np.where(explained_var < threshold)[0]
+    ica.exclude = exclude_components
+    raw_clean = ica.apply(raw1, exclude=ica.exclude)
+    target=muscle_state_exdf(sfreq)
+    muscle_df = target
+    events = [
+    [0, 0, 0],  
+    [int(sfreq*10), 0, 1],
+    [int(sfreq*30), 1, 2],
+    [int(sfreq*50), 2, 0],
+    [int(sfreq*70), 0, 3],
+    [int(sfreq*90), 3, 4],
+    [int(sfreq*110), 4, 5]
+    ]
+    event_id = {
+    'Rest': 0,
+    'right_hand_slow': 1,
+    'right_hand_fast': 2,
+    'left_hand_slow': 3,
+    'left_hand_fast': 4,
+    'random_movement': 5
+    } 
+    epochs = mne.Epochs(raw1, events, event_id=event_id, tmin=-0.5, tmax=0.5)
+    epochs.apply_baseline((None, 0))
+    epochs.load_data()
+    epochs.filter(l_freq=0.5, h_freq=40)
+    evoked=epochs.average()
+    evoked_0 = epochs['right_hand_fast'].average()
+    # plt.subplot(2,1,1)
+    plt.style.use('ggplot')
+    evoked_0.plot(gfp=True)
+    # plt.subplot(2,1,2)
+    plt.style.use('dark_background')      
+    evoked_0.plot_joint(times=np.arange(-0.4,0.4,0.1))
 
+def epochp4(filen):
+    global ica
+    global df1
+    global sfreq
+    global raw1
+    explained_var = np.abs(ica.get_components())
+    threshold = 0.1 
+    exclude_components = np.where(explained_var < threshold)[0]
+    ica.exclude = exclude_components
+    raw_clean = ica.apply(raw1, exclude=ica.exclude)
+    target=muscle_state_exdf(sfreq)
+    muscle_df = target
+    events = [
+    [0, 0, 0],  
+    [int(sfreq*10), 0, 1],
+    [int(sfreq*30), 1, 2],
+    [int(sfreq*50), 2, 0],
+    [int(sfreq*70), 0, 3],
+    [int(sfreq*90), 3, 4],
+    [int(sfreq*110), 4, 5]
+    ]
+    event_id = {
+    'Rest': 0,
+    'right_hand_slow': 1,
+    'right_hand_fast': 2,
+    'left_hand_slow': 3,
+    'left_hand_fast': 4,
+    'random_movement': 5
+    } 
+    epochs = mne.Epochs(raw1, events, event_id=event_id, tmin=-0.5, tmax=0.5)
+    epochs.apply_baseline((None, 0))
+    epochs.load_data()
+    epochs.filter(l_freq=0.5, h_freq=40)
+    evoked=epochs.average()
+    evoked_0 = epochs['left_hand_slow'].average()
+    # plt.subplot(2,1,1)
+    plt.style.use('ggplot')
+    evoked_0.plot(gfp=True)
+    # plt.subplot(2,1,2)
+    plt.style.use('dark_background')      
+    # evoked_0.plot_topomap(times=[0.1, 0.2, 0.3,0.4])
+    evoked_0.plot_joint(times=np.arange(-0.4,0.4,0.1))
+    
+def epochp5(filen):
+    global ica
+    global df1
+    global sfreq
+    global raw1
+    explained_var = np.abs(ica.get_components())
+    threshold = 0.1 
+    exclude_components = np.where(explained_var < threshold)[0]
+    ica.exclude = exclude_components
+    raw_clean = ica.apply(raw1, exclude=ica.exclude)
+    target=muscle_state_exdf(sfreq)
+    muscle_df = target
+    events = [
+    [0, 0, 0],  
+    [int(sfreq*10), 0, 1],
+    [int(sfreq*30), 1, 2],
+    [int(sfreq*50), 2, 0],
+    [int(sfreq*70), 0, 3],
+    [int(sfreq*90), 3, 4],
+    [int(sfreq*110), 4, 5]
+    ]
+    event_id = {
+    'Rest': 0,
+    'right_hand_slow': 1,
+    'right_hand_fast': 2,
+    'left_hand_slow': 3,
+    'left_hand_fast': 4,
+    'random_movement': 5
+    } 
+    epochs = mne.Epochs(raw1, events, event_id=event_id, tmin=-0.5, tmax=0.5)
+    epochs.apply_baseline((None, 0))
+    epochs.load_data()
+    epochs.filter(l_freq=0.5, h_freq=40)
+    evoked=epochs.average()
+    evoked_0 = epochs['left_hand_fast'].average()
+    # plt.subplot(2,1,1)
+    # plt.style.use('ggplot')
+    evoked_0.plot(gfp=True)
+    # plt.subplot(2,1,2)
+    plt.style.use('dark_background')      
+    # evoked_0.plot_topomap(times=[0.1, 0.2, 0.3,0.4])
+    evoked_0.plot_joint(times=np.arange(-0.4,0.4,0.1))
+    
+def epochp6(filen):
+    global ica
+    global df1
+    global sfreq
+    global raw1
+    explained_var = np.abs(ica.get_components())
+    threshold = 0.1 
+    exclude_components = np.where(explained_var < threshold)[0]
+    ica.exclude = exclude_components
+    raw_clean = ica.apply(raw1, exclude=ica.exclude)
+    target=muscle_state_exdf(sfreq)
+    muscle_df = target
+    events = [
+    [0, 0, 0],  
+    [int(sfreq*10), 0, 1],
+    [int(sfreq*30), 1, 2],
+    [int(sfreq*50), 2, 0],
+    [int(sfreq*70), 0, 3],
+    [int(sfreq*90), 3, 4],
+    [int(sfreq*110), 4, 5]
+    ]
+    event_id = {
+    'Rest': 0,
+    'right_hand_slow': 1,
+    'right_hand_fast': 2,
+    'left_hand_slow': 3,
+    'left_hand_fast': 4,
+    'random_movement': 5
+    } 
+    epochs = mne.Epochs(raw1, events, event_id=event_id, tmin=-0.5, tmax=0.5)
+    epochs.apply_baseline((None, 0))
+    epochs.load_data()
+    epochs.filter(l_freq=0.5, h_freq=40)
+    evoked=epochs.average()
+    evoked_0 = epochs['random_movement'].average()
+    # plt.subplot(2,1,1)
+    plt.style.use('ggplot')
+    evoked_0.plot(gfp=True)
+    # plt.subplot(2,1,2)
+    plt.style.use('dark_background')      
+    # evoked_0.plot_topomap(times=[0.1, 0.2, 0.3,0.4])
+    evoked_0.plot_joint(times=np.arange(-0.4,0.4,0.1))
+    
+
+def epochp1_trial(filen):
+    global ica
+    global df1
+    global sfreq
+    global raw1
+    explained_var = np.abs(ica.get_components())
+    threshold = 0.1 
+    exclude_components = np.where(explained_var < threshold)[0]
+    ica.exclude = exclude_components
+    raw_clean = ica.apply(raw1, exclude=ica.exclude)
+    target=muscle_state_exdf(sfreq)
+    muscle_df = target
+    events = [
+    [0, 0, 0],  
+    [int(sfreq*10), 0, 1],
+    [int(sfreq*30), 1, 2],
+    [int(sfreq*50), 2, 0],
+    [int(sfreq*70), 0, 3],
+    [int(sfreq*90), 3, 4],
+    [int(sfreq*110), 4, 5]
+    ]
+    event_id = {
+    'Rest': 0,
+    'right_hand_slow': 1,
+    'right_hand_fast': 2,
+    'left_hand_slow': 3,
+    'left_hand_fast': 4,
+    'random_movement': 5
+    } 
+    epochs = mne.Epochs(raw1, events, event_id=event_id, tmin=-0.5, tmax=0.5)
+    epochs.apply_baseline((None, 0))
+    epochs.load_data()
+    epochs.filter(l_freq=0.5, h_freq=40)
+    evoked=epochs.average()
+    evoked_0 = epochs['Rest'].average()
+    # plt.subplot(2,1,1)
+    # plt.style.use('ggplot')
+    evoked_0.plot()
+    # plt.subplot(2,1,2)
+    plt.style.use('dark_background')      
+    # evoked_0.plot_topomap(times=[-0.4,-0.3,-0.2,-0.1,0,0.1, 0.2, 0.3,0.4])
+    fig, anim = evoked_0.animate_topomap(times=np.arange(-0.4,0.4,0.05), frame_rate=2, blit=False)
+    plt.show()
+    anim.save('D:/matlab/animation.')
     
     
 if  __name__=="__main__" :
     
     filen=askopenfilename()
     ica_plots(filen)
-    epoch_plots()
+    epochp1_trial(filen)

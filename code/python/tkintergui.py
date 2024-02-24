@@ -14,7 +14,7 @@ filepath =''
 class MainApp:
     def __init__(self, master):
         self.master = master
-        self.master.title("Main Application")
+        self.master.title("Map-y")
         self.master.geometry("800x800")
 
         
@@ -50,17 +50,59 @@ class MainApp:
         
         self.tab5 = ttk.Frame(self.notebook1)
         self.tab6 = ttk.Frame(self.notebook1)
+        label1 = ttk.Label(self.tab1, text="Mapy Ai model")
+        label1.pack(pady=20)
+        # label3.pack()
+        liveb=ttk.Button(self.tab1,text="start model",command=self.callmodel)
+        liveb.pack(pady=20)
+        
+        
+        
+        
+        self.progressBar1= ttk.Progressbar(self.tab1, mode='determinate',
+                                          maximum=50, length=200, orient= tk.VERTICAL)
+        self.progressBar1.pack(padx=20,side = tk.LEFT,anchor='nw')
+        lpb1 = ttk.Label(self.tab1, text="REST")
+        lpb1.pack(padx=0,side=tk.LEFT,expand=False,anchor='nw')
+        self.progressBar2= ttk.Progressbar(self.tab1, mode='determinate',
+                                          maximum=50, length=200, orient= tk.VERTICAL)
+        self.progressBar2.pack(padx=20,side = tk.LEFT,anchor='nw')
+        lpb2 = ttk.Label(self.tab1, text="RSM")
+        lpb2.pack(padx=0,side=tk.LEFT,expand=False,anchor='nw')
+        
+        self.progressBar3= ttk.Progressbar(self.tab1, mode='determinate',
+                                          maximum=50, length=200, orient= tk.VERTICAL)
+        self.progressBar3.pack(padx=20,side = tk.LEFT,anchor='nw')
+        lpb3 = ttk.Label(self.tab1, text="RFM")
+        lpb3.pack(padx=0,side=tk.LEFT,expand=False,anchor='nw')
+        self.progressBar4= ttk.Progressbar(self.tab1, mode='determinate',
+                                          maximum=50, length=200, orient= tk.VERTICAL)
+        self.progressBar4.pack(padx=20,side = tk.LEFT,anchor='nw')
+        lpb4 = ttk.Label(self.tab1, text="LSM")
+        lpb4.pack(padx=0,side=tk.LEFT,expand=False,anchor='nw')
+        
+        self.progressBar5= ttk.Progressbar(self.tab1, mode='determinate',
+                                          maximum=50, length=200, orient= tk.VERTICAL)
+        self.progressBar5.pack(padx=20,side = tk.LEFT,anchor='nw')
+        lpb5 = ttk.Label(self.tab1, text="LFM")
+        lpb5.pack(padx=0,side=tk.LEFT,expand=False,anchor='nw')
+        self.progressBar6= ttk.Progressbar(self.tab1, mode='determinate',
+                                          maximum=50, length=200, orient= tk.VERTICAL)
+        self.progressBar6.pack(padx=20,side = tk.LEFT,anchor='nw')
+        lpb6 = ttk.Label(self.tab1, text="RAND")
+        lpb6.pack(padx=0,side=tk.LEFT,expand=False,anchor='nw')
+        
+        
+        
+        
         self.notebook1.add(self.tab5, text="basic visualisation")
         self.notebook1.add(self.tab6, text="Advanced component visualisation")
         
         label2 = ttk.Label(self.tab3, text="Ensure that you have connected the device to comport7")
         label2.pack(pady=20)
-        label3 = ttk.Label(self.tab5, text="visualise")
+        label3 = ttk.Label(self.tab5, text="visualisation oƒ EEG using FFT and PSD with corelation of muscle states")
         label3.pack(pady=20)
-        # label3.pack()
-        label1 = ttk.Label(self.tab1, text="This is the ai app.")
-        label1.pack(pady=20)
-        actual = ttk.Button(self.tab3, text="Actual data", command=self.actual)
+        actual = ttk.Button(self.tab3, text="muscle movement data", command=self.actual)
         actual.pack(pady=20)
 
         imaginary = ttk.Button(self.tab3, text="Imaginary data", command=self.imaginary)
@@ -81,6 +123,22 @@ class MainApp:
         psdpl3.pack(pady=10)
         psdpl4=ttk.Button(self.tab5,text='PSD of EEG chx T8',command=self.psdplotT8)
         psdpl4.pack(pady=10)
+        
+        
+        mne_pl2=ttk.Button(self.tab6,text='ICA PLOT',command=self.plot_ica)
+        mne_pl2.pack(pady=10)
+        mne_pl3=ttk.Button(self.tab6,text='epoch plot of Rest movement',command=self.plot_epochs2)
+        mne_pl3.pack(pady=10)
+        mne_pl4=ttk.Button(self.tab6,text='epoch plot of Right-Hand slow Movement',command=self.plot_epochs3)
+        mne_pl4.pack(pady=10)
+        mne_pl5=ttk.Button(self.tab6,text='epoch plot of Right-Hand fast Movement',command=self.plot_epochs4)
+        mne_pl5.pack(pady=10)
+        mne_pl6=ttk.Button(self.tab6,text='epoch plot of Left-Hand slow Movement',command=self.plot_epochs5)
+        mne_pl6.pack(pady=10)
+        mne_pl7=ttk.Button(self.tab6,text='epoch plot of Left-Hand fast Movement',command=self.plot_epochs6)
+        mne_pl7.pack(pady=10)
+        mne_pl8=ttk.Button(self.tab6,text='epoch plot of Random Hand Movement',command=self.plot_epochs7)
+        mne_pl8.pack(pady=10)
 # class Redirect():
 
 #     def __init__(self, widget):
@@ -196,23 +254,87 @@ class MainApp:
         global filename,filepath
         if filename == '' and filepath == '':
            filename, filepath = mg.ret_filename()
-           mg.ica_plots(filepath+'/'+filename)
+           mg.ica_plots(filename)
              
         #
         else:
-            mg.ica_plots(filepath+'/'+filename)
+            mg.ica_plots(filename)
             
     def plot_epochs(self):
         global filename,filepath
         if filename == '' and filepath == '':
            filename, filepath = mg.ret_filename()
-           mg.epoch_plots(filepath+'/'+filename)
+           mg.epoch_plots(filename)
              
         #
         else:
-            mg.epoch_plots(filepath+'/'+filename)
+            mg.epoch_plots(filename)
+    
+    def plot_epochs2(self):
+        global filename,filepath
+        if filename == '' and filepath == '':
+           filename, filepath = mg.ret_filename()
+           mg.epochp1(filename)
              
-            
+        #
+        else:
+            mg.epochp1(filename)        
+
+    def plot_epochs3(self):
+        global filename,filepath
+        if filename == '' and filepath == '':
+           filename, filepath = mg.ret_filename()
+           mg.epochp2(filename)
+             
+        #
+        else:
+            mg.epochp2(filename)        
+
+    def plot_epochs4(self):
+        global filename,filepath
+        if filename == '' and filepath == '':
+           filename, filepath = mg.ret_filename()
+           mg.epochp3(filename)
+             
+        #
+        else:
+            mg.epochp3(filename)        
+
+    def plot_epochs5(self):
+        global filename,filepath
+        if filename == '' and filepath == '':
+           filename, filepath = mg.ret_filename()
+           mg.epochp4(filename)
+             
+        #
+        else:
+            mg.epochp4(filename)        
+
+
+    def plot_epochs6(self):
+        global filename,filepath
+        if filename == '' and filepath == '':
+           filename, filepath = mg.ret_filename()
+           mg.epochp5(filename)
+             
+        #
+        else:
+            mg.epochp5(filename)        
+
+    def plot_epochs7(self):
+        global filename,filepath
+        if filename == '' and filepath == '':
+           filename, filepath = mg.ret_filename()
+           mg.epochp6(filename)
+             
+        #
+        else:
+            mg.epochp6(filename)        
+
+    def callmodel():
+        return 0
+
+
         #     # figure1,figure2,figure3 = acv.get_fft(filename,filepath)
         #     fig1 = acv.figure_option_eeg(filename, filepath)
         #     top_level = tk.Toplevel(self.master)
@@ -249,7 +371,7 @@ if __name__ == "__main__":
     # root.tk.call('source', "D:/matlab/ymaps_code/code/python/azure.tcl")
     # root.tk.call("set_theme", "dark")
     sv_ttk.set_theme("dark")
-    root.iconbitmap('icon.ico')
+    root.iconbitmap('D:\matlab\ymaps_code\code\python\icon.ico')
 
 
     app = MainApp(root)

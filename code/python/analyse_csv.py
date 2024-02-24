@@ -7,10 +7,14 @@ from tkinter import *
 from tkinter.filedialog import askdirectory,askopenfilename
 import matplotlib as mpl
 
+
+
 sampling_freq_value=0
 def ms_pdf(filename,path):
     exg_df=pandas_framemaker(filename,path)
     muscle_state_exdf(filename,path,exg_df)
+    
+    
     
 def pandas_framemaker(filename,path):
     exg_Df=pd.read_csv(path+"/"+filename, header=None,on_bad_lines='skip')
@@ -22,12 +26,16 @@ def pandas_framemaker(filename,path):
         exg_Df.columns=['e1','e2','e3','T7','C3','C4','T8']
     return exg_Df
 
+
+
 def get_sampling_freq(filename,path):
     global sampling_freq_value
     df=pd.read_csv(path+"/"+filename, header=None,on_bad_lines='skip')
     length=len(df)
     sampling_freq_value=float(length/120)
     return float(length/120)
+
+
 
 def muscle_state_exdf(filename,path,exg_Df):
     
@@ -65,6 +73,8 @@ def muscle_state_exdf(filename,path,exg_Df):
     return musclestate
 
 
+
+
 def muscle_state(filename,path):
     global sampling_freq_value
     sampling_frequency=sampling_freq_value
@@ -98,6 +108,8 @@ def muscle_state(filename,path):
     file.write(str(musclestate))
     print(f"file  is created with  sampling frequency {sampling_frequency}")
     file.close()
+
+
 
 def get_fft(filename,path):
     
@@ -135,6 +147,8 @@ def get_fft(filename,path):
     return fig1, fig2, fig3
 
 
+    
+    
 def plotter_eeg(file_name,filepath,eeg1,eeg2,eeg3,eeg4,T):
     
     plt.style.use('dark_background')
@@ -176,6 +190,8 @@ def plotter_eeg(file_name,filepath,eeg1,eeg2,eeg3,eeg4,T):
     plt.show()
     # plt.show()
     return fig1
+    
+    
     
     
 def plotter_fft(file_name,filepath,E1,E2,E3,E4,N,T,freq,eeg1,eeg2,eeg3,eeg4):
@@ -306,6 +322,8 @@ def plotter_fft(file_name,filepath,E1,E2,E3,E4,N,T,freq,eeg1,eeg2,eeg3,eeg4):
     return fig1
 
 
+
+
 def plotter_psd(file_name,filepath,eeg1,eeg2,eeg3,eeg4,s_f,T):
     eeg1_=eeg1.to_numpy()
     eeg1_=eeg1_.reshape(len(eeg1),)
@@ -420,6 +438,8 @@ def plotter_psd(file_name,filepath,eeg1,eeg2,eeg3,eeg4,s_f,T):
     # plt.savefig(filepath+'/'+'psdT8freq_'+file_name.replace('.csv','')+'.svg')
     # plt.show()
     return fig1,fig2,fig3,fig4
+
+
 def figure_option_eeg(filename,path):
     eeg_df=pandas_framemaker(filename,path)
     eeg1=eeg_df.loc[:,["T7"]]
@@ -469,6 +489,8 @@ def figure_option_eeg(filename,path):
     # plt.savefig(filepath+'/'+'VvsT_'+file_name.replace('.csv','')+'.svg')
     plt.show()
     
+
+
 
 def figure_option_fft(filename,path):
     eeg_df=pandas_framemaker(filename,path)
@@ -583,6 +605,8 @@ def figure_option_fft(filename,path):
     # plt.savefig(filepath+'/'+'fftfreq_'+file_name.replace('.csv','')+'.svg')
     plt.show()
 
+
+
 def figure_option_psdT7(filename,path):
     eeg_df=pandas_framemaker(filename,path)
     eeg1=eeg_df.loc[:,["T7"]]
@@ -617,6 +641,8 @@ def figure_option_psdT7(filename,path):
     ax2.grid(linewidth=0.5,linestyle=':',color='green')
     # plt.savefig(filepath+'/'+'psdT7freq_'+file_name.replace('.csv','')+'.svg')
     plt.show()
+   
+   
       
 def figure_option_psdC3(filename,path):
     eeg_df=pandas_framemaker(filename,path)
@@ -654,6 +680,8 @@ def figure_option_psdC3(filename,path):
     plt.show()
     
     
+    
+    
 def figure_option_psdC4(filename,path):
     eeg_df=pandas_framemaker(filename,path)
     eeg3=eeg_df.loc[:,["C4"]]
@@ -688,6 +716,8 @@ def figure_option_psdC4(filename,path):
     ax2.grid(linewidth=0.5,linestyle=':',color='green')
     # plt.savefig(filepath+'/'+'psdC4freq_'+file_name.replace('.csv','')+'.svg')
     plt.show()
+    
+    
     
 
 def figure_option_psdT8(filename,path):
