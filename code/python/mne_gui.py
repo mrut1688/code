@@ -223,7 +223,7 @@ def epochp1(filen):
     plt.style.use('ggplot')
     evoked_0.plot(gfp=True)
     # # plt.subplot(2,1,2)
-    # plt.style.use('dark_background')      
+    plt.style.use('dark_background')      
     # evoked_0.plot_topomap(times=np.arange(-0.4,0.4,0.1))
     evoked_0.plot_joint(times=np.arange(-0.4,0.4,0.1))
     
